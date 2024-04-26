@@ -11,12 +11,9 @@ export const Peso = sequelize.define('peso' , {
     },
     nombre: {
         type: DataTypes.STRING
-    },
-    campeon: {
-        type: DataTypes.INTEGER
     }
 })
-
+export default Peso;
 // One to many : peso -> luchador
 Peso.hasMany(luchador , {
     foreingKey: 'idpeso',

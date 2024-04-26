@@ -1,10 +1,10 @@
 import pkg from 'sequelize';
 const { DataTypes } = pkg;
 import { sequelize } from "../database/database.js";
-import combate from "./combate.js";
+import Combate from "./combate.js";
 
 
-export const Luchador = sequelize.define('luchador' , {
+export const Luchador = sequelize.define('luchadores' , {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -28,19 +28,12 @@ export const Luchador = sequelize.define('luchador' , {
     nacionalidad: {
         type: DataTypes.STRING    
     },
-    idpeso: {
-        type: DataTypes.INTEGER
-    },
     imagen: {
         type: DataTypes.STRING
     }
 })
-Luchador.belongsToMany(combate, {
-    through: 'ParticipacionEnCombate',
-    foreignKey: 'idLuchador'
-  });
-  
-
-
-
 export default Luchador;
+
+
+
+
