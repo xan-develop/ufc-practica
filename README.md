@@ -146,3 +146,13 @@ Se dan por echo las siquientes consultas
 
 
 ### Combate
+
+- Introducir participacion en una pelea , solo 2 por idCombate y tienen que ser del mismo peso  
+Ejemplo de insersion json :
+```json
+{
+    "luchador1": 4,
+    "luchador2": 5
+}
+```
+

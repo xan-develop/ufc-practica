@@ -1,10 +1,6 @@
 import app from './app.js';
 import { sequelize } from './database/database.js';
-import './models/evento.js'
-import './models/peso.js'
-import './models/luchador.js'
-import './models/arbitro.js'
-import './models/combate.js'
+
 
 
 // Definimos en el index estas relaciones para que no haya conflicto en el orden de importacion
@@ -13,12 +9,12 @@ import Luchador from './models/luchador.js';
 import Peso from './models/peso.js';
 
 Luchador.belongsToMany(Combate, {
-   through: 'ParticipacionEnCombate',
+   through: 'ParticipacionEnCombates',
    foreignKey: 'idLuchador'
 });
 
 Combate.belongsToMany(Luchador, {
-   through: 'ParticipacionEnCombate',
+   through: 'ParticipacionEnCombates',
    foreignKey: 'idCombate'
 });
 
@@ -45,7 +41,7 @@ Luchador.hasMany(Combate, {
 
 async function main(){
    try {
-    await sequelize.sync()
+    await sequelize.sync({force: false})
      app.listen(3000);
      console.log('Server on port 3000');
    } catch (error) {
