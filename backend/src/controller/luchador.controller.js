@@ -44,38 +44,60 @@ try {
     return res.status(500).json({message: error.message});
 }
 }
+// AGREGAR VARIOS LUCHADORES
+export const createLuchadores = async (req, res) => {
+    try {
+      console.log('Estás llamando a crear varios luchadores');
+      const luchadores = req.body; // Recibe un array de luchadores
+  
+      // Utiliza Promise.all para ejecutar varias operaciones de creación en paralelo
+      const nuevosLuchadores = await Promise.all(
+        luchadores.map(async (luchador) => {
+          
+          return await Luchador.create(luchador);
+        })
+      );
+  
+      res.json(nuevosLuchadores);
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  };
+  
 // ACTUALIZAR UN LUCHADOR
 
-export const updateLuchador = async (req, res) =>{
-try {
-        console.log('Estas llamando a updateLuchador')
-        const {id} = req.params
-        const {nombre, edad, pesoid , especialidad, nacionalidad, victorias, derrotas, imagen} = req.body
-        const luchador = Luchador.findByPk(id)
-        if(!luchador){
-            return res.status(404).json({message: 'Luchador no encontrado'})
+export const updateLuchador = async (req, res) => {
+    try {
+        console.log('Estás llamando a updateLuchador');
+        const { id } = req.params;
+        const { nombre, edad, pesoid, especialidad, nacionalidad, victorias, derrotas, imagen } = req.body;
+        const luchador = await Luchador.findByPk(id);
+        if (!luchador) {
+            return res.status(404).json({ message: 'Luchador no encontrado' });
         }
-        luchador.nombre = nombre;
-        luchador.edad = edad;
-        luchador.pesoid = pesoid;
-        luchador.especialidad = especialidad;
-        luchador.nacionalidad = nacionalidad;
-        luchador.victorias = victorias;
-        luchador.derrotas = derrotas;
-        luchador.imagen = imagen;
-        await luchador.save()
-        res.json(luchador)
-} catch (error) {
-    return res.status(500).json({message: error.message});
-}
-}
+        await luchador.update({
+            nombre: nombre,
+            edad: edad,
+            pesoid: pesoid,
+            especialidad: especialidad,
+            nacionalidad: nacionalidad,
+            victorias: victorias,
+            derrotas: derrotas,
+            imagen: imagen
+        });
+        return res.json(luchador);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
+
 
 // ELIMINAR LUCHADOR
 export const deleteLuchador = async (req, res) =>{
 try {
         console.log('Estas llamando a deleteLuchador')
         const {id} = req.params
-        const luchadoreliminado = Luchador.findByPk(id)
+        
             await Luchador.destroy({
                 where: {
                     id,
@@ -84,7 +106,7 @@ try {
             if(!luchador){
                 return res.status(404).json({message: 'Luchador no encontrado'})
             }
-            res.json(luchadoreliminado);
+           
             
 } catch (error) {
     return res.status(500).json({message: error.message});

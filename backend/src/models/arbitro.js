@@ -25,3 +25,5 @@ combate.belongsTo(Arbitro, {
     foreignKey: 'idarbitro',
     targetId: 'id'
 })
+
+export default Arbitro;
