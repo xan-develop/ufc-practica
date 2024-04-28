@@ -57,6 +57,18 @@ Combate.belongsToMany(luchador, {
   });
   
 ```
+- Victorias de los combates 
+```javaScript
+Combate.belongsTo(Luchador, {
+   foreignKey: 'victoria',
+   targetKey: 'id'
+});
+
+Luchador.hasMany(Combate, {
+   foreignKey: 'victoria',
+   sourceKey: 'id'
+});
+```
 #### Luchadores - Peso - Campeones
 Se genera una tabla intermedia automaticamente con el nombre de la relación.
 - En Peso

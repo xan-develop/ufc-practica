@@ -2,6 +2,7 @@ import express from 'express';
 import luchadorRoutes from './routes/luchador.routes.js'
 import pesoRoutes from './routes/peso.routes.js'
 import arbitroRoutes from './routes/arbitro.routes.js'
+import eventoRoutes from './routes/eventos.controller.js'
 
 
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(luchadorRoutes);
 app.use(pesoRoutes);
 app.use(arbitroRoutes);
+app.use(eventoRoutes);
 
 //Exportar
 

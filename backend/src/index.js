@@ -32,7 +32,16 @@ Luchador.belongsToMany(Peso, {
    foreignKey: 'idLuchador'
 } );
 
+// Many to one combate -> luchador
+Combate.belongsTo(Luchador, {
+   foreignKey: 'victoria',
+   targetKey: 'id'
+});
 
+Luchador.hasMany(Combate, {
+   foreignKey: 'victoria',
+   sourceKey: 'id'
+});
 
 async function main(){
    try {
