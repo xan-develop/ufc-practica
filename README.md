@@ -1,5 +1,7 @@
 ## Datos de comprension
 ![diagrama de datos](./basedatos/diagrama-ufc.png)
+### Inserciones iniciales
+![inserciones](inserciones.md)
 ### Relaciones
 #### Peso
 ```javaScript
@@ -143,7 +145,10 @@ Se dan por echo las siquientes consultas
  
 ### Luchador
 
+- Luchadores por peso
 
+### Eventos
+- Combates por evento
 
 ### Combate
 

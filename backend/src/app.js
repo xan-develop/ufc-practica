@@ -5,6 +5,7 @@ import arbitroRoutes from './routes/arbitro.routes.js'
 import eventoRoutes from './routes/eventos.controller.js'
 import combateRoutes from './routes/combate.routes.js'
 import gestorRoutes from './routes/gestionCombates.routes.js'
+import vistasRoutes from './routes/vistas.routes.js'
 
 
 
@@ -21,6 +22,7 @@ app.use(arbitroRoutes);
 app.use(eventoRoutes);
 app.use(combateRoutes);
 app.use(gestorRoutes);
+app.use(vistasRoutes);
 
 //Exportar
 
