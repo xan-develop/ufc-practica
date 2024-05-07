@@ -2,10 +2,11 @@ import { sequelize } from "../database/database.js";
 
 export const getLuchadoresPeso = async (req, res) => {
     try {
+        const { peso } = req.params;
         // Realizar consulta SQL a la vista 
         console.log('Estas llamando a vista luchadoresPeso')
         const luchadoresPorPeso = await sequelize.query(
-            'SELECT * FROM luchadoresPeso',
+            `SELECT * FROM luchadoresPeso WHERE peso = ${peso}`,
             { type: sequelize.QueryTypes.SELECT }
         );
 
