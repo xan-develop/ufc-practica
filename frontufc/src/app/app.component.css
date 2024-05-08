@@ -1,0 +1,61 @@
+
+
+header{
+  align-items: center;
+  margin: auto;
+}
+/* MENU DE NAVEGACION */
+nav{
+  display: flex;
+  background-color: #000000;
+  text-align: center;
+  justify-content: center;
+  height: 50px;
+  line-height: 40px;
+  border-radius: 30px;
+  width: 60%;
+  margin: auto;
+}
+
+.menu-enlaces {
+  justify-content: center; /* Centrar horizontalmente */
+  width: 110px;
+  align-items: center;
+  margin-top: 5px;
+  text-align: center;
+  transition: 0.5s;
+  margin-left: 40px;
+  height: 40px;
+  background-color: #323232;
+  border-radius: 10px;
+}
+
+a{
+  text-decoration: none;
+  color: #ffffff;
+  transition: 0.5s;
+}
+a:hover{
+  color: #000000;
+}
+
+.menu-enlaces:hover {
+  background-color: #999999;
+}
+/* LOGO Y LINEA */
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#Layer_1{
+  width: 21%;
+  fill: #E31D1C; /* Cambiar el color de relleno del SVG */
+}
+#linea {
+  margin: auto;
+  border: 1px solid #E31D1C; /* Borde sólido de color negro */
+  width: 70%;
+  margin-bottom: 30px;
+}

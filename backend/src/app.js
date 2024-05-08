@@ -6,6 +6,7 @@ import eventoRoutes from './routes/eventos.controller.js'
 import combateRoutes from './routes/combate.routes.js'
 import gestorRoutes from './routes/gestionCombates.routes.js'
 import vistasRoutes from './routes/vistas.routes.js'
+import path from 'path';
 
 
 
@@ -13,6 +14,14 @@ const app = express();
 
 //Middlewares
 app.use(express.json());
+
+// Middleware para habilitar CORS
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Permitir solicitudes desde cualquier origen
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // Permitir los métodos HTTP especificados
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Permitir los encabezados especificados
+    next();
+  });
 
 // Rutas
 
@@ -25,5 +34,13 @@ app.use(gestorRoutes);
 app.use(vistasRoutes);
 
 //Exportar
+// Configuración para servir archivos estáticos desde la carpeta 'src/img/fighters'
+const directorioImagenes = path.join('src', 'img', 'fighters');
+app.use('/imagen', express.static(directorioImagenes));
 
+// Ruta para obtener la imagen
+app.get('/imagen/:nombreImagen', (req, res) => {
+  const nombreImagen = req.params.nombreImagen;
+  res.sendFile(path.join(directorioImagenes, nombreImagen));
+});
 export default app;

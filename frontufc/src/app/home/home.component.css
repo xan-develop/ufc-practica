@@ -1,0 +1,128 @@
+h1{
+  margin-top: 20px;
+  text-align: center;
+  font-family: 'Public Sans';
+  font-style: italic;
+  font-weight: 600;
+  font-size: 35px;
+  line-height: 56px;
+  color: #000000;
+}
+/* Grid Para Combates */
+#combate {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Crea tres columnas de tamaño igual */
+ /* Espacio entre las cajas */
+ background-color: #E8E8E8;
+}
+
+#luch1,
+#central,
+#luch2 {
+  height: 500px; /* Altura de las cajas (ajusta según sea necesario) */
+}
+#central{
+  display: flex;
+  justify-content: center;
+
+}
+/* Frame */
+#cartel {
+  margin-top: 30px;
+  background-color: #BB9F56;
+  width: 50%;
+  height: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Establecer posición relativa para crear un contexto de apilamiento */
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#Layer_cartel {
+  width: 60%;
+  position: absolute; /* Establecer posición absoluta */
+  top: 20%; /* Colocar el elemento en la mitad superior del contenedor padre */
+  left: 50%; /* Colocar el elemento en el centro horizontal del contenedor padre */
+  transform: translate(-50%, -50%);
+}
+#linea-cartel {
+  fill: rgb(5, 5, 5) !important;
+  width: 100px;
+  height: 50px;
+  position: absolute; /* Establecer posición absoluta */
+  top: 45%; /* Colocar el elemento en la mitad superior del contenedor padre */
+  left: 35%; /* Colocar el elemento en el centro horizontal del contenedor padre */
+  transform: translate(-50%, -50%);
+}
+
+#num-evento{
+  width: 100px;
+  height: 50px;
+  position: absolute; /* Establecer posición absoluta */
+  top: 23%; /* Colocar el elemento en la mitad superior del contenedor padre */
+  left: 60%; /* Colocar el elemento en el centro horizontal del contenedor padre */
+  transform: translate(-50%, -50%);
+  font-family: 'Public Sans';
+  font-style: italic;
+  font-weight: 900;
+  font-size: 60px;
+  letter-spacing: -0.01em;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+#img-vs {
+  width: 10%;
+  position: absolute; /* Establecer posición relativa */
+  top: 90%;
+}
+#peso-home{
+  position: absolute; /* Establecer posición relativa */
+  top: 80%;
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #6C6C6C;
+  text-transform: uppercase;
+}
+#info{
+  width: 90%;
+}
+#luch1 , #luch2{
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(2 , 1fr);
+  justify-content: center;
+  align-items: center;
+  font-family: 'Public Sans';
+  font-style: italic;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+
+}
+#imagen-luchador{
+  width: 75%;
+  position: absolute;
+  left: 25%;
+  top: 16%;
+
+}
+#pais{
+  position: absolute;
+  top: 90%;
+
+}
+#linea {
+  margin: auto;
+  border: 1px solid #E31D1C; /* Borde sólido de color negro */
+  width: 500px;
+  margin-bottom: 30px;
+}
+
+
+
+

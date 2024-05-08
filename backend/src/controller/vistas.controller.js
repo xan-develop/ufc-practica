@@ -17,7 +17,23 @@ export const getLuchadoresPeso = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+export const getUltimosCombates = async (req, res) => {
+    try {
+        const { peso } = req.params;
+        // Realizar consulta SQL a la vista 
+        console.log('Estas llamando a vista UltimosCombates')
+        const ultimocombate = await sequelize.query(
+            `SELECT * FROM ultimoscombates order by peleaid`,
+            { type: sequelize.QueryTypes.SELECT }
+        );
 
+        
+        res.json(ultimocombate);
+    } catch (error) {
+      
+        res.status(500).json({ message: error.message });
+    }
+};
 export const getCombatesEvento = async (req, res) => {
     try {
         const { idevento } = req.params;
