@@ -5,9 +5,8 @@ import { catchError, Observable, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CombatesService {
-
-  private urlVista='http://localhost:3000/api/vista/';
+export class EventosService {
+  private urlVista='http://localhost:3000/api/eventos/';
 
   constructor(private http: HttpClient ) { }
 
@@ -17,17 +16,8 @@ export class CombatesService {
     })
   }
 
-  getUltimosCombates(): Observable<any[]> {
-    return this.http.get<any[]>(this.urlVista+'ultimosCombates').pipe(
-      catchError(error => {
-        console.error('Error al obtener datos:', error);
-        return throwError(error);
-      })
-    );
-  }
-
-  getAllCombates(id: number): Observable<any[]> {
-    return this.http.get<any[]>(this.urlVista+'allcombates/'+id).pipe(
+  getEventos(): Observable<any[]> {
+    return this.http.get<any[]>(this.urlVista).pipe(
       catchError(error => {
         console.error('Error al obtener datos:', error);
         return throwError(error);

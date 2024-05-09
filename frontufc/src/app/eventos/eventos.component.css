@@ -1,0 +1,176 @@
+body{
+  background-color: #BB9F56 !important;
+}
+#seccion-eventos {
+  display: grid;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  grid-template-columns: repeat(3, 1fr); /* 2 columnas con el mismo ancho */
+  gap: 20px; /* Espacio entre los carteles */
+  margin-top: 5%;
+}
+.cartel {
+  margin-top: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  text-align: center;
+  justify-self: center; /* Centrar horizontalmente dentro de la celda del grid */
+  align-self: center; /* Centrar verticalmente dentro de la celda del grid */
+}
+#cartel {
+  background-color: #000000;
+  padding: 10px;
+  width: 85%;
+  height: 155%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Establecer posición relativa para crear un contexto de apilamiento */
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  transition: height 0.5s; /* Añadimos transición solo para la altura */
+}
+
+
+#Layer_cartel {
+  width: 60%;
+  position: absolute; /* Establecer posición absoluta */
+  top: 20%; /* Colocar el elemento en la mitad superior del contenedor padre */
+  left: 50%; /* Colocar el elemento en el centro horizontal del contenedor padre */
+  transform: translate(-50%, -50%);
+  fill: #BB9F56;
+
+}
+#linea-cartel {
+  fill:#BB9F56 !important;
+  width: 40%;
+  height: 40%;
+  position: absolute; /* Establecer posición absoluta */
+  top: 34%; /* Colocar el elemento en la mitad superior del contenedor padre */
+  left: 28%; /* Colocar el elemento en el centro horizontal del contenedor padre */
+  transform: translate(-50%, -50%);
+}
+
+#num-evento{
+  width: 50%;
+  height: 0%;
+  position: absolute; /* Establecer posición absoluta */
+  top: 25%; /* Colocar el elemento en la mitad superior del contenedor padre */
+  left: 70%; /* Colocar el elemento en el centro horizontal del contenedor padre */
+  transform: translate(-50%, -50%);
+  font-family: 'Public Sans';
+  font-style: italic;
+  font-weight: 900;
+  font-size: 500%;
+  letter-spacing: -0.01em;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-shadow: 0px 7px 7px rgba(252, 218, 0, 0.25);
+  color: #BB9F56;
+}
+@media (max-width: 1000px) {
+  #seccion-eventos {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas con el mismo ancho */
+  }
+  #num-evento{
+    font-size: 400%;
+  }
+}
+@media (max-width: 700px) {
+  #seccion-eventos {
+    grid-template-columns: repeat(1, 1fr); /* 2 columnas con el mismo ancho */
+  }
+  #num-evento{
+    font-size: 400%;
+  }
+}
+#central{
+  display: flex;
+  justify-content: center;
+  height: 400px;
+}
+#container-cartel{
+  margin-top: 50px;
+}
+.info-evento {
+  padding: 10px;
+  width: 80%;
+  height: 85%;
+  color: #BB9F56;
+  margin-left: 8%;
+  margin-bottom: 40px;
+  display: flex;
+  position: relative;
+  align-items: flex-start; /* Alinea los elementos al principio verticalmente */
+  flex-direction: column;
+}
+
+.info-item {
+  margin-right: auto; /* Margen izquierdo automático para alinear a la izquierda */
+}
+#boton-cartelera {
+  background-color: #BB9F56; /* Rojo intenso, color característico de la UFC */
+  color: #FFFFFF; /* Texto blanco para resaltar sobre el fondo rojo */
+  border: none; /* Eliminar borde del botón */
+  padding: 10px 20px; /* Espaciado interno */
+  font-size: 16px; /* Tamaño de fuente */
+  font-weight: bold; /* Texto en negrita */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar cursor al pasar el ratón */
+  transition: background-color 0.3s, color 0.3s; /* Efecto de transición suave */
+}
+
+#boton-cartelera:hover {
+  background-color: #bb9e564c; /* Cambio de color al pasar el ratón */
+}
+
+.info-button{
+  margin-left: auto;
+  margin-right: 5%;
+}
+/* MENU DE NAVEGACION */
+nav{
+  background-color: #000000;
+
+}
+
+.menu-enlaces {
+  background-color: #b0955293;
+}
+
+a{
+  text-decoration: none;
+  color: #ffffff;
+  transition: 0.5s;
+}
+a:hover{
+  color: #000000;
+}
+
+.menu-enlaces:hover {
+  background-color: #BB9F56 !important;
+}
+#icon-nav {
+  color: #BB9F56 !important;
+transition: 0.5s;
+}
+#icon-nav:hover {
+  transform: scale(1.3);
+}
+#icon-class{
+  background-color: #000000;
+  transition: 0.5s;
+}
+#icon-class:hover{
+  background-color: #00000000 !important;
+}
+
+/* LOGO Y LINEA */
+
+#Layer_1{
+  fill: #000000 !important; /* Cambiar el color de relleno del SVG */
+}
+#linea {
+  border: 1px solid #000000 !important; /* Borde sólido de color negro */
+}
+

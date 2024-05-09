@@ -12,14 +12,17 @@ h1{
 #combate {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Crea tres columnas de tamaño igual */
- /* Espacio entre las cajas */
- background-color: #E8E8E8;
+  height: 100%;
+  padding: 20px;
 }
-
+#fondo{
+background-color: #ffffff;
+height: 100%;
+}
 #luch1,
 #central,
 #luch2 {
-  height: 500px; /* Altura de las cajas (ajusta según sea necesario) */
+  height: 600px;
 }
 #central{
   display: flex;
@@ -31,38 +34,38 @@ h1{
   margin-top: 30px;
   background-color: #BB9F56;
   width: 50%;
-  height: 35%;
+  height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; /* Establecer posición relativa para crear un contexto de apilamiento */
+  position: relative;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 #Layer_cartel {
   width: 60%;
-  position: absolute; /* Establecer posición absoluta */
-  top: 20%; /* Colocar el elemento en la mitad superior del contenedor padre */
-  left: 50%; /* Colocar el elemento en el centro horizontal del contenedor padre */
+  position: absolute;
+  top: 20%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 #linea-cartel {
   fill: rgb(5, 5, 5) !important;
   width: 100px;
   height: 50px;
-  position: absolute; /* Establecer posición absoluta */
-  top: 45%; /* Colocar el elemento en la mitad superior del contenedor padre */
-  left: 35%; /* Colocar el elemento en el centro horizontal del contenedor padre */
+  position: absolute;
+  top: 45%;
+  left: 35%;
   transform: translate(-50%, -50%);
 }
 
 #num-evento{
   width: 100px;
   height: 50px;
-  position: absolute; /* Establecer posición absoluta */
-  top: 23%; /* Colocar el elemento en la mitad superior del contenedor padre */
-  left: 60%; /* Colocar el elemento en el centro horizontal del contenedor padre */
+  position: absolute;
+  top: 23%;
+  left: 60%;
   transform: translate(-50%, -50%);
   font-family: 'Public Sans';
   font-style: italic;
@@ -70,16 +73,16 @@ h1{
   font-size: 60px;
   letter-spacing: -0.01em;
   font-feature-settings: 'tnum' on, 'lnum' on;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-shadow: 0px 4px 4px rgba(30, 17, 17, 0.25);
 }
 #img-vs {
-  width: 10%;
-  position: absolute; /* Establecer posición relativa */
-  top: 90%;
+  width: 50%;
+  position: relative;
+  top: 120%;
 }
 #peso-home{
-  position: absolute; /* Establecer posición relativa */
-  top: 80%;
+  position: absolute;
+  top: 120%;
   font-family: 'Public Sans';
   font-style: normal;
   font-weight: 700;
@@ -105,9 +108,8 @@ h1{
 
 }
 #imagen-luchador{
-  width: 75%;
-  position: absolute;
-  left: 25%;
+  width: 95%;
+  position: relative;
   top: 16%;
 
 }
@@ -118,9 +120,16 @@ h1{
 }
 #linea {
   margin: auto;
-  border: 1px solid #E31D1C; /* Borde sólido de color negro */
+  border: 1px solid #E31D1C;
   width: 500px;
   margin-bottom: 30px;
+}
+#line {
+  border: 1px solid #e31c1c70;
+  margin-top: 80px;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 

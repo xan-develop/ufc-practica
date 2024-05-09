@@ -1,6 +1,7 @@
-<h1>Últimos Combates</h1>
+<h1>Último Evento</h1>
 <section id="home-combates">
-  <ng-container *ngFor="let combate of data; let i = index">
+  <ng-container id="ngcontainer" *ngFor="let combate of data; let i = index">
+    <div id="fondo">
     <div *ngIf="i % 2 === 0" id="combate">
       <div id="luch1" class="combate">
         <div id="info">
@@ -18,8 +19,8 @@
         </div>
       </div>
       <div id="central" class="combate">
-        <div id="cartel">
-          <div id="container-cartel">
+        <div id="cartel" [ngStyle]="{'background-color': i === 0 ? '#BB9F56' : 'initial','box-shadow': i === 0 ? 'none' : 'initial'}">
+          <div id="container-cartel" *ngIf="i == 0">
             <svg mlns:dc="http://purl.org/dc/elements/1.1/"
               xmlns:cc="http://creativecommons.org/ns#"
               xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -83,10 +84,11 @@
               </defs>
             </svg>
           </div>
-          <p id="num-evento">{{ combate.eventoid }}</p>
+          <p id="num-evento" *ngIf="i == 0">{{ combate.eventoid }}</p>
+          <span id="peso-home">{{combate.peso}}</span>
+          <img id="img-vs" src="../../assets/imagenes/VS.png" alt="">
         </div>
-        <span id="peso-home"><p id="textopeso">Heaviweight Bout</p></span>
-        <img id="img-vs" src="../../assets/imagenes/VS.png" alt="">
+
       </div>
 
       <div id="luch2" class="combate">
@@ -105,6 +107,8 @@
         </div>
       </div>
     </div>
+    <div id="line" *ngIf="i % 2 == 0"></div>
+  </div>
   </ng-container>
 
 </section>

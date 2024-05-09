@@ -34,6 +34,23 @@ export const getUltimosCombates = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+export const getAllcombates = async (req, res) => {
+    try {
+        const { idevento } = req.params;
+        // Realizar consulta SQL a la vista 
+        console.log('Estas llamando a vista Todos los combates')
+        const todoscombates = await sequelize.query(
+            `SELECT * FROM allcombates WHERE evento = ${idevento}`,
+            { type: sequelize.QueryTypes.SELECT }
+        );
+
+        
+        res.json(todoscombates);
+    } catch (error) {
+      
+        res.status(500).json({ message: error.message });
+    }
+};
 export const getCombatesEvento = async (req, res) => {
     try {
         const { idevento } = req.params;

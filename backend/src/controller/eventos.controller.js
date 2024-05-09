@@ -4,7 +4,11 @@ import { Evento } from '../models/evento.js';
 export const getEventos = async (req, res) => {
     try {
         console.log('Estás llamando a getEventos');
-        const eventos = await Evento.findAll();
+        const eventos = await Evento.findAll({
+            order: [
+                ['id', 'DESC'] // Ordena por el campo 'id' de forma ascendente
+            ]
+        });
         res.json(eventos);
     } catch (error) {
         return res.status(500).json({ message: error.message });
