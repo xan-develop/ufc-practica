@@ -30,6 +30,9 @@ export const Luchador = sequelize.define('luchadores' , {
     },
     imagen: {
         type: DataTypes.STRING
+    },
+    rango: {
+        type: DataTypes.INTEGER
     }
 })
 export default Luchador;

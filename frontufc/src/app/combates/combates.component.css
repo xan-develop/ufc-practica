@@ -2,8 +2,6 @@
 html {
   background: linear-gradient(to bottom, #BB9F56 3%, #fdfdfd 40%);
   background-repeat: no-repeat; /* ¡Aquí está el cambio! */
-
-
 }
 .pelea{
   height: 250px;

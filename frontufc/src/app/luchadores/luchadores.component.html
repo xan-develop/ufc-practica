@@ -1,0 +1,20 @@
+<section id="luchadores">
+  <div id="luch-container">
+    <div class="pesos" *ngFor="let campeon of campeones">
+      <div id="campeon">
+        <div id="img-campeon">
+          <img [src]="urlImg + campeon.imagen" alt="">
+      </div>
+        <div id="info-campeon">
+          <p id="text-peso"># {{campeon.peso}}</p>
+          <p id="text-nombre">{{campeon.nombre}}</p>
+
+          <p id="text-campeon">Campeon</p>
+        </div>
+      </div>
+      <div id="ranking">
+        <div class="luchador" *ngFor="let luchador of obtenerPeso(campeon.pesoid)"><p>#{{luchador.rango}}  {{luchador.nombre}}</p></div>
+      </div>
+    </div>
+  </div>
+</section>

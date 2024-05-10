@@ -8,13 +8,15 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { EventosComponent } from './eventos/eventos.component';
 import { CombatesComponent } from './combates/combates.component';
+import { LuchadoresComponent } from './luchadores/luchadores.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     EventosComponent,
-    CombatesComponent
+    CombatesComponent,
+    LuchadoresComponent
   ],
   imports: [
     BrowserModule,

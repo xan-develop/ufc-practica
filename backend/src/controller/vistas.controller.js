@@ -1,12 +1,30 @@
 import { sequelize } from "../database/database.js";
 
 export const getLuchadoresPeso = async (req, res) => {
+    const pesoId = "pesoId";
     try {
         const { peso } = req.params;
         // Realizar consulta SQL a la vista 
         console.log('Estas llamando a vista luchadoresPeso')
         const luchadoresPorPeso = await sequelize.query(
-            `SELECT * FROM luchadoresPeso WHERE peso = ${peso}`,
+            `SELECT * FROM porpesorango WHERE ${pesoId} = ${peso}`,
+            { type: sequelize.QueryTypes.SELECT }
+        );
+
+        
+        res.json(luchadoresPorPeso);
+    } catch (error) {
+      
+        res.status(500).json({ message: error.message });
+    }
+};
+export const getLuchadoresPesoAll = async (req, res) => {
+    try {
+        
+        // Realizar consulta SQL a la vista 
+        console.log('Estas llamando a vista luchadoresPeso')
+        const luchadoresPorPeso = await sequelize.query(
+            `SELECT * FROM porpesorango`,
             { type: sequelize.QueryTypes.SELECT }
         );
 
@@ -24,6 +42,40 @@ export const getUltimosCombates = async (req, res) => {
         console.log('Estas llamando a vista UltimosCombates')
         const ultimocombate = await sequelize.query(
             `SELECT * FROM ultimoscombates order by peleaid`,
+            { type: sequelize.QueryTypes.SELECT }
+        );
+
+        
+        res.json(ultimocombate);
+    } catch (error) {
+      
+        res.status(500).json({ message: error.message });
+    }
+};
+export const getCampeones = async (req, res) => {
+    try {
+        
+        // Realizar consulta SQL a la vista 
+        console.log('Estas llamando a vista Campeones')
+        const ultimocombate = await sequelize.query(
+            `SELECT * FROM campeonesrango`,
+            { type: sequelize.QueryTypes.SELECT }
+        );
+
+        
+        res.json(ultimocombate);
+    } catch (error) {
+      
+        res.status(500).json({ message: error.message });
+    }
+};
+export const getRanking = async (req, res) => {
+    try {
+        const { peso } = req.params;
+        // Realizar consulta SQL a la vista 
+        console.log('Estas llamando a vista Ranking')
+        const ultimocombate = await sequelize.query(
+            `SELECT * FROM ranking where pesoid = ${peso}`,
             { type: sequelize.QueryTypes.SELECT }
         );
 

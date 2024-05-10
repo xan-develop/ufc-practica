@@ -41,7 +41,7 @@ Luchador.hasMany(Combate, {
 
 async function main(){
    try {
-    await sequelize.sync({force: false})
+    await sequelize.sync({})
      app.listen(3000);
      console.log('Server on port 3000');
    } catch (error) {

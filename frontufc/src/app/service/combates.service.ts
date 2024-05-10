@@ -34,4 +34,28 @@ export class CombatesService {
       })
     );
   }
+  getPorPeso(id: number): Observable<any[]> {
+    return this.http.get<any[]>(this.urlVista+'luchadoresPeso/'+id).pipe(
+      catchError(error => {
+        console.error('Error al obtener datos:', error);
+        return throwError(error);
+      })
+    );
+  }
+  getCampeones(): Observable<any[]> {
+    return this.http.get<any[]>(this.urlVista+'campeones').pipe(
+      catchError(error => {
+        console.error('Error al obtener datos:', error);
+        return throwError(error);
+      })
+    );
+  }
+  getRanking(id: number): Observable<any[]> {
+    return this.http.get<any[]>(this.urlVista+'ranking/'+id).pipe(
+      catchError(error => {
+        console.error('Error al obtener datos:', error);
+        return throwError(error);
+      })
+    );
+  }
 }
