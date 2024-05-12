@@ -1,0 +1,66 @@
+html{
+  background-color: #000000 !important;
+
+}
+nav{
+  background-color: azure !important;
+}
+#icon-class{
+  background-color: #ffffff !important;
+  margin-top: 10px;
+}
+.menu-enlaces:hover {
+  background-color: #ee3030 !important;
+}
+a:hover{
+  color: #ffffff !important;
+}
+/* Estilo general del contenedor del formulario */
+#sugerencias {
+  margin: 50px auto;
+  width: 30%;
+  border-radius: 10px;
+  border: 1px solid #ee3030;
+  background-color: #e7e7e7;
+  padding: 20px;
+}
+
+/* Estilo de las etiquetas */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Estilo de los inputs y select */
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+
+/* Estilo del botón */
+input[type="submit"] {
+  background-color: #ee3030;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Estilo del botón al pasar el ratón por encima */
+input[type="submit"]:hover {
+  background-color: #ff4444;
+}
+#largo {
+  height: 150px; /* Ajustamos la altura */
+}
+#formulario{
+  font-size: 17px;
+}
