@@ -5,6 +5,8 @@ import { EventosComponent } from './eventos/eventos.component';
 import { CombatesComponent } from './combates/combates.component';
 import { LuchadoresComponent } from './luchadores/luchadores.component';
 import { SugerenciasComponent } from './sugerencias/sugerencias.component';
+import { LuchadorComponent } from './luchador/luchador.component';
+import { UnicoComponent } from './luchador/unico/unico.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -13,6 +15,8 @@ const routes: Routes = [
   {path: 'luchadores' , component: LuchadoresComponent},
   {path: 'combates/:id' , component: CombatesComponent},
   {path: 'sugerencias' , component: SugerenciasComponent},
+  {path: 'todos' , component: LuchadorComponent},
+  {path: 'luchador/:id' , component: UnicoComponent},
 ];
 
 @NgModule({

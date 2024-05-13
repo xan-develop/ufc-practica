@@ -3,8 +3,12 @@
 header{
   align-items: center;
   margin: auto;
+  margin-top: 40px;
 }
 /* MENU DE NAVEGACION */
+#icon-enlace img{
+  width: 60%;
+}
 nav{
   display: flex;
   background-color: #000000;
@@ -15,6 +19,7 @@ nav{
   border-radius: 30px;
   width: 60%;
   margin: auto;
+  margin-top: 40px;
 }
 
 .menu-enlaces {
@@ -29,6 +34,50 @@ nav{
   height: 40px;
   background-color: #323232;
   border-radius: 10px;
+}
+.menu-enlaces {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  border-radius: 10px;
+  left: 0;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease, max-height 0.3s ease;
+  max-height: 0;
+  overflow: hidden; /
+}
+
+.menu-enlaces:hover .dropdown {
+  display: block;
+  opacity: 1;
+  max-height: 200px;
+}
+
+.dropdown ul {
+  background-color: #070707;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown ul li {
+  padding: 10px;
+  transition: 0.5s;
+}
+.dropdown ul li:hover {
+  background-color: #999999a6;
+}
+
+.dropdown ul li a {
+  display: block;
+  text-decoration: none;
+  color: #ffffff;
 }
 
 a{
@@ -85,6 +134,7 @@ a:hover{
   border: 1px solid #E31D1C; /* Borde sólido de color negro */
   width: 70%;
   margin-bottom: 30px;
+  margin-top: 80px;
 }
 
 

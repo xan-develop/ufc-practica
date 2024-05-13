@@ -10,6 +10,8 @@ import { EventosComponent } from './eventos/eventos.component';
 import { CombatesComponent } from './combates/combates.component';
 import { LuchadoresComponent } from './luchadores/luchadores.component';
 import { SugerenciasComponent } from './sugerencias/sugerencias.component';
+import { LuchadorComponent } from './luchador/luchador.component';
+import { UnicoComponent } from './luchador/unico/unico.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { SugerenciasComponent } from './sugerencias/sugerencias.component';
     EventosComponent,
     CombatesComponent,
     LuchadoresComponent,
-    SugerenciasComponent
+    SugerenciasComponent,
+    LuchadorComponent,
+    UnicoComponent
   ],
   imports: [
     BrowserModule,

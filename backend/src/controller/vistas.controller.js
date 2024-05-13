@@ -103,6 +103,39 @@ export const getAllcombates = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+export const getidPelea = async (req, res) => {
+    try {
+        const { luchador } = req.params;
+        console.log('Estás llamando a la vista getIDcombate');
+        
+        // Utiliza la vista definida en la base de datos
+        const idpelea = await sequelize.query(
+            `SELECT pelea FROM idpeleas WHERE luchador = ${luchador} ORDER BY pelea desc LIMIT 1`,
+            { type: sequelize.QueryTypes.SELECT }
+        );
+
+        res.json(idpelea);
+        console.log(idpelea)
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
+export const getlastFight = async (req, res) => {
+    try {
+        const { pelea } = req.params;
+        console.log('Estás llamando a la vista getIDcombate');
+        
+        // Utiliza la vista definida en la base de datos
+        const ultima = await sequelize.query(
+            `SELECT * FROM lastFight WHERE pelea = ${pelea}`,
+            { type: sequelize.QueryTypes.SELECT }
+        );
+        res.json(ultima);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
+
 export const getCombatesEvento = async (req, res) => {
     try {
         const { idevento } = req.params;

@@ -1,0 +1,24 @@
+<section id="luchador">
+  <div id="container">
+<div id="info">
+  <p>{{luchador?.nombre}}</p>
+  <p>{{pesoNombre}}</p>
+  <p>Record : {{luchador?.victorias}} - {{luchador?.derrotas}}</p>
+  <span id="pais"><img src="https://flagsapi.com/{{ luchador?.nacionalidad | uppercase }}/flat/64.png">
+  </span>
+</div>
+<div id="foto"><img id="imagen-luchador" [src]="urlImg + luchador?.imagen" alt=""></div>
+<div id="historial">
+  <span id="title">ÚLTIMO COMBATE</span>
+  <div id="combate">
+    <div id="img-combate">
+      <div id="img1"><img [src]="urlImg + lastFight1.imagen" alt=""></div>
+      <div id="img2"><img [src]="urlImg + lastFight2.imagen" alt="" [class.transparent-img]="lastFight2.luchadorid !== lastFight2.ganador"></div>
+    </div>
+<div id="info-combate">
+  <span id="versus" style="color: antiquewhite;"><p>{{lastFight1.nombre}} VS {{lastFight2.nombre}}</p><a id="link" style="text-decoration: none;" href="/combates/{{lastFight1.evento}}"><p>UFC {{lastFight1.evento}}</p></a></span>
+</div>
+  </div>
+</div>
+  </div>
+</section>

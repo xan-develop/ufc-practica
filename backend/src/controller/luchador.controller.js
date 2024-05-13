@@ -1,14 +1,15 @@
 import {Luchador} from '../models/luchador.js'
 
 // LISTA TODOS LOS LUCHADORES
-export const getLuchadores = async (req, res) =>{
-
+export const getLuchadores = async (req, res) => {
     try {
-        const luchadores = await Luchador.findAll();
-        console.log('Llamando a getLuchadores')
-        res.json({luchadores});
+        const luchadores = await Luchador.findAll({
+            order: [['nombre', 'ASC']] 
+        });
+        console.log('Llamando a getLuchadores');
+        res.json({ luchadores });
     } catch (error) {
-        return res.status(500).json({message: error.message});
+        return res.status(500).json({ message: error.message });
     }
 }
 

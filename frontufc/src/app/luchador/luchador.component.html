@@ -1,0 +1,27 @@
+<section id="todos">
+  <div class="container">
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar..." id="search-input" [(ngModel)]="searchTerm" (ngModelChange)="llenarData(searchTerm, toNum(peso))">
+      <select id="weight-filter" [(ngModel)]="peso" (ngModelChange)="llenarData(searchTerm, toNum(peso))">
+        <option value="0">Filtrar por peso</option>
+        <option value="1">Peso Mosca</option>
+        <option value="8">Peso Gallo</option>
+        <option value="2">Peso Pluma</option>
+        <option value="3">Peso Ligero</option>
+        <option value="4">Peso Wélter</option>
+        <option value="5">Peso Medio</option>
+        <option value="6">Peso Semipesado</option>
+        <option value="7">Peso Pesado</option>
+      </select>
+    </div>
+    </div>
+  <div class="grid-container">
+    <div class="grid-item" *ngFor="let luchador of luchadoresFiltrados">
+      <a [href]="url + luchador.id">
+      <span id="nombre">{{luchador.nombre}}</span><br>
+      <span id="Record">Record : {{luchador.victorias}} - {{luchador.derrotas}}  (w - d)</span>
+      <div id="linea"></div>
+      <span> <img id="img-luchador" [src]="urlImg + luchador.imagen" alt=""></span></a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,114 @@
+#container{
+  margin-top: 50px;
+  border: 1px solid bisque;
+  width: 100%;
+  height: 70vh;
+  display: grid;
+  grid-template-columns: repeat(3 , 1fr);
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.918);
+  margin-bottom: 30px;
+}
+#pais img{
+  width: 20%;
+  margin-left: 30px;
+}
+#info{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgb(224, 224, 224);
+}
+
+#info p{
+margin-left: 40px;
+font-family: 'Public Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 24px;
+display: flex;
+align-items: center;
+text-shadow: 0px 4px 4px rgba(187, 159, 86, 0.41);
+
+}
+#historial{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: end;
+  text-align: center;
+}
+#title{
+  color: aliceblue;
+
+margin-right: 30px;
+margin-bottom: 30px;
+font-family: 'Public Sans';
+font-style: italic;
+font-weight: 500;
+font-size: 32px;
+line-height: 38px;
+display: flex;
+align-items: center;
+color: #e7e7e7;
+text-shadow: 0px 4px 4px rgba(187, 159, 86, 0.41);
+
+}
+#combate{
+  background-color: rgb(70, 70, 70);
+  width: 60%;
+  height: 50%;
+  margin-right: 30px;
+  display: grid;
+  grid-template-columns: repeat(1 , 1fr);
+  grid-template-rows: 2fr 1fr;
+  transition: 0.5s;
+}
+#combate:hover{
+  transform: scale(1.1);
+}
+#foto{
+  position: relative;
+  align-items: center;
+  justify-content: center;
+
+  filter: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.25));
+
+}
+#imagen-luchador{
+  position: absolute;
+  width: 70%;
+  margin-top: 10px;
+  margin-left: 40px;
+  top: auto;
+  bottom: 0;
+}
+.transparent-img {
+  opacity: 0.5; /* Cambia este valor para ajustar la transparencia */
+}
+
+#img-combate{
+  display: grid;
+  grid-template-columns: repeat(2 , 1fr);
+  overflow: hidden;
+}
+#img-combate img{
+  width: 120%;
+}
+#info-combate , #link{
+  text-align: center;
+  margin-top: 10px;
+}
+#link{
+  color: #e7e7e7;
+text-shadow: 0px 4px 4px rgba(187, 159, 86, 0.41);
+transition: 0.5s;
+}
+#link:hover{
+  color: #eedc38;
+}
+#info-combate span{
+  margin-top: 10px;
+}
