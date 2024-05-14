@@ -17,7 +17,7 @@ nav{
   height: 50px;
   line-height: 40px;
   border-radius: 30px;
-  width: 60%;
+  width: 70%;
   margin: auto;
   margin-top: 40px;
 }
@@ -25,7 +25,7 @@ nav{
 .menu-enlaces {
   position: relative;
   justify-content: center; /* Centrar horizontalmente */
-  width: 110px;
+  width: 140px;
   align-items: center;
   margin-top: 5px;
   text-align: center;
@@ -105,14 +105,14 @@ a:hover{
   background-color: #000000;
   margin-top: 10px;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1350px) {
   nav {
-    width: 90%; /* Reducir el ancho del menú en pantallas más pequeñas */
+    width: 80%; /* Reducir el ancho del menú en pantallas más pequeñas */
   }
 
   .menu-enlaces {
     margin-left: 20px; /* Reducir el margen izquierdo para ajustarse al ancho del menú */
-    font-size: 10px;
+    font-size: 13px;
     width: 10%;
     height: 80%;
   }

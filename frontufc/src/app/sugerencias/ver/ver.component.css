@@ -1,0 +1,35 @@
+body{
+  background-color: azure !important;
+}
+section {
+  display: grid;
+  width: 90%;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  margin: auto;
+  height: 50vh;
+}
+
+#sugerencia {
+
+  height: 400px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(231, 231, 231);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+  transition: 0.5s;
+}
+#sugerencia:hover{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-15px);
+  background-color: rgb(250, 250, 250);
+}
+#sugerencia p {
+  margin-left: 20px;
+  margin-top: 30px;
+  font-size: 20px;
+  font-weight: 500;
+
+}
