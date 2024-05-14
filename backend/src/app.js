@@ -6,6 +6,8 @@ import eventoRoutes from './routes/eventos.controller.js'
 import combateRoutes from './routes/combate.routes.js'
 import gestorRoutes from './routes/gestionCombates.routes.js'
 import vistasRoutes from './routes/vistas.routes.js'
+import suggestRoutes from './routes/sugerencia.routes.js'
+import userRoutes from './routes/users.routes.js'
 import path from 'path';
 
 
@@ -32,6 +34,8 @@ app.use(eventoRoutes);
 app.use(combateRoutes);
 app.use(gestorRoutes);
 app.use(vistasRoutes);
+app.use(suggestRoutes);
+app.use(userRoutes);
 
 //Exportar
 // Configuración para servir archivos estáticos desde la carpeta 'src/img/fighters'

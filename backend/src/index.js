@@ -7,6 +7,8 @@ import { sequelize } from './database/database.js';
 import Combate from './models/combate.js';
 import Luchador from './models/luchador.js';
 import Peso from './models/peso.js';
+import Sugerencia from './models/sugerencias.js';
+import Users from './models/user.js';
 
 Luchador.belongsToMany(Combate, {
    through: 'ParticipacionEnCombates',

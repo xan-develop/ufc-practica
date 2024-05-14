@@ -1,22 +1,37 @@
 <section id="sugerencias">
-<form id="formulario">
+<form id="formulario" name="form-suggest" (ngSubmit)="crearSugerencia()">
+
 <label for="nombre">Tu nombre :</label>
-<input type="text">
+<input type="text" name="usuario" [(ngModel)]="nuevaSugerencia.usuario">
+
 <label for="mail">Tu correo :</label>
-<input type="text">
+<input type="text"  name="correo" [(ngModel)]="nuevaSugerencia.correo">
+
 <label for="peso">Elige el peso :</label>
-<select name="peso" id="peso">
-  <option value="jose">Jose</option>
+<select id="weight-filter" name="peso"   (change)="llenarData(toNum(peso))" [(ngModel)]="peso">
+  <option value="0" >Filtrar por peso</option>
+  <option value="1" >Peso Mosca</option>
+  <option value="8" >Peso Gallo</option>
+  <option value="2">Peso Pluma</option>
+  <option value="3">Peso Ligero</option>
+  <option value="4">Peso Wélter</option>
+  <option value="5">Peso Medio</option>
+  <option value="6">Peso Semipesado</option>
+  <option value="7">Peso Pesado</option>
 </select>
+
 <label for="luch1">Primer luchador :</label>
-<select name="luch1" id="luch1">
-  <option value="jose">Jose</option>
+<select name="luchador1" [(ngModel)]="nuevaSugerencia.luchador1" id="luch1">
+  <option *ngFor="let luchador of luchadoresFiltrados" [value]="luchador.nombre" >{{luchador.nombre}}</option>
 </select>
+
 <label for="luch2">Segundo luchador :</label>
-<select name="luch2" id="luch2">
-  <option value="jose">Jose</option>
+<select name="luchador2" [(ngModel)]="nuevaSugerencia.luchador2" id="luch2">
+  <option *ngFor="let luchador of luchadoresFiltrados" [value]="luchador.nombre" >{{luchador.nombre}}</option>
 </select>
+
 <label for="desc">Poque te gustaria</label>
-<input type="text" id="largo">
+<input type="text" id="largo" name="descripcion" [(ngModel)]="nuevaSugerencia.descripcion">
+<button type="submit" class="sug-btn">Sugerir</button>
 </form>
 </section>

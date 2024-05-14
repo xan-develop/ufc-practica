@@ -64,3 +64,23 @@ input[type="submit"]:hover {
 #formulario{
   font-size: 17px;
 }
+.sug-btn {
+  background-color: #ee3030;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  align-items: end;
+  align-content: end;
+  justify-content: flex-end;
+}
+
+.sug-btn:hover {
+  background-color: #211f1f;
+}
