@@ -1,4 +1,50 @@
-## Datos de comprension
+# CORRER PROYECTO
+
+## Con back-end en Docker
+### Clonar Repositorio , acceder desde terminal a carpeta **backDocker** 
+```
+cd ./backDocker/
+```
+### Construir compose
+```
+docker-compose up -d
+```
+**Asegurar que los dos contenedores creados esten corriendo**
+### Acceder a la carpeta **frontufc** y correr el servidor :
+```
+cd ./frontufc/
+ng serve -o
+```
+## Guia para Dockerizar backend
+[Dockerizar API Nodejs y Datos Postgress](docker.md)
+## Con Maquina local 
+### Clonamos el Repositorio localmente 
+```
+git clone https://github.com/alexgeviden/ufc-practica
+```
+### Crear docker postgress con la base de datos
+#### Usaremos el Dockerfile en la carpeta **basedatos** para importar los datos y crear el contenedor automaticamente
+```
+cd ./basedatos/
+docker build -t ufcdatos .
+docker run -d --name postgresufc-datos -p 5432:5432  ufcdatos
+```
+**Mantener Docker activo**
+### Acceder al repositorio local por terminal y ejecutar lo siguiente:
+```
+cd ./frontufc/
+
+npm install
+
+cd ../backend/
+
+npm install
+npm run dev
+
+cd ../frontufc
+ng serve -o
+```
+# Datos de comprension
 ![diagrama de datos](./basedatos/diagrama-ufc.png)
 ### Inserciones iniciales
 ![inserciones](inserciones.md)

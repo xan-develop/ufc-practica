@@ -14,6 +14,12 @@ h1{
   grid-template-columns: repeat(3, 1fr); /* Crea tres columnas de tamaño igual */
   height: 100%;
   padding: 20px;
+  transition: 0.5s;
+}
+#combate:hover{
+  background-color: #d6d6d6;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+
 }
 #fondo{
 background-color: #ffffff;
@@ -34,7 +40,7 @@ height: 100%;
   margin-top: 30px;
   background-color: #BB9F56;
   width: 50%;
-  height: 50%;
+  height: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,7 +61,7 @@ height: 100%;
   width: 100px;
   height: 50px;
   position: absolute;
-  top: 45%;
+  top: 35%;
   left: 35%;
   transform: translate(-50%, -50%);
 }
