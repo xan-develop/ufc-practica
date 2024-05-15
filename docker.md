@@ -18,10 +18,9 @@ EXPOSE 3000
 CMD ["npm", "start"]
 
 ``` 
-## 2º Creamos el archivo docker-compose.yml
-### Esto lo hacemos para dockerizar tanto el backend como la base de datos (postgres)
-**Como paso previo he exportado la base de datos para incluirla en la raiz del proyecto y pueda ser importada al correr el docker-componse**  
-### Adjunto guia de los pasos para exportar una base de datos de un contenedor a maquina local e importarla en otro
+## 2ºCreamos el archivo docker-compose.yml
+- **Como paso previo he exportado la base de datos para incluirla en la raiz del proyecto y pueda ser importada al correr el docker-componse**  
+### Adjunto guia para exportar una base de datos de un contenedor a maquina local e importarla en otro
 ### Exportar Base de datos
 
 ```sql
@@ -41,7 +40,7 @@ docker cp basededatos.sql nombre_del_contenedor:/ruta/en/el/contenedor
 ```sql
 # psql -U postgres -d ufc -f /basedatosufc.sql
 ```
-### Archivo docker-compose.yml
+## Archivo docker-compose.yml
 **Hemos de crear un archivo .env donde se guardaran las variables de entorno**  
 - Archivo .env
 ```env
