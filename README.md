@@ -1,5 +1,6 @@
 # CORRER PROYECTO
 
+## **Opcion 1** 
 ## Con back-end en Docker
 ### Clonar Repositorio , acceder desde terminal a carpeta **backDocker** 
 ```
@@ -17,7 +18,8 @@ ng serve -o
 ```
 ## Guia para Dockerizar backend
 [Dockerizar API Nodejs y Datos Postgress](docker.md)
-## Con Maquina local 
+## **Opcion 2**
+## Con Maquina local
 ### Clonamos el Repositorio localmente 
 ```
 git clone https://github.com/alexgeviden/ufc-practica
