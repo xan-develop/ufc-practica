@@ -46,8 +46,7 @@ ng serve -o
 ```
 # Datos de comprension
 ![diagrama de datos](./basedatos/diagrama-ufc.png)
-### Inserciones iniciales
-![inserciones](inserciones.md)
+
 ### Relaciones
 #### Peso
 ```javaScript
