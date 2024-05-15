@@ -18,6 +18,10 @@ ng serve -o
 ```
 ## Guia para Dockerizar backend
 [Dockerizar API Nodejs y Datos Postgress](docker.md)
+  
+**-----------------------------------------------------**  
+  
+    
 ## **Opcion 2**
 ## Con Maquina local
 ### Clonamos el Repositorio localmente 
