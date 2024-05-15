@@ -19,7 +19,7 @@ docker ps -a
 docker start (nombre_contenedor)
 ```
 ### Acceder al enlace del front desplegado :
-https://front-angular-ufc.vercel.app/home
+https://front-ufc-api.vercel.app/
 ## Guia para Dockerizar backend
 [Dockerizar API Nodejs y Datos Postgress](docker.md)
   
