@@ -11,11 +11,8 @@ cd ./backDocker/
 docker-compose up -d
 ```
 **Asegurar que los dos contenedores creados esten corriendo**
-### Acceder a la carpeta **frontufc** y correr el servidor :
-```
-cd ./frontufc/
-ng serve -o
-```
+### Acceder al enlace del front desplegado :
+https://front-angular-ufc.vercel.app/home
 ## Guia para Dockerizar backend
 [Dockerizar API Nodejs y Datos Postgress](docker.md)
   
