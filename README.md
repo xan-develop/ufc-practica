@@ -11,6 +11,13 @@ cd ./backDocker/
 docker-compose up -d
 ```
 **Asegurar que los dos contenedores creados esten corriendo**
+```Docker
+docker ps -a
+```
+**Si alguno no esta corriendo , ejecutar :**
+```Docker
+docker start (nombre_contenedor)
+```
 ### Acceder al enlace del front desplegado :
 https://front-angular-ufc.vercel.app/home
 ## Guia para Dockerizar backend
