@@ -35,6 +35,17 @@ CREATE TABLE public."ParticipacionEnCombates" (
 ALTER TABLE public."ParticipacionEnCombates" OWNER TO postgres;
 
 --
+-- Name: SequelizeMeta; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."SequelizeMeta" (
+    name character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public."SequelizeMeta" OWNER TO postgres;
+
+--
 -- Name: arbitros; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -96,7 +107,12 @@ CREATE TABLE public.luchadores (
     "createdAt" timestamp with time zone NOT NULL,
     "updatedAt" timestamp with time zone NOT NULL,
     "pesoId" integer,
-    rango integer
+    rango integer,
+    altura double precision,
+    finalizaciones integer,
+    kos integer,
+    decisiones integer,
+    alias character varying(255)
 );
 
 
@@ -187,7 +203,8 @@ CREATE TABLE public.campeones (
     "createdAt" timestamp with time zone NOT NULL,
     "updatedAt" timestamp with time zone NOT NULL,
     "idPeso" integer NOT NULL,
-    "idLuchador" integer NOT NULL
+    "idLuchador" integer NOT NULL,
+    defensas integer DEFAULT 0
 );
 
 
@@ -301,6 +318,30 @@ CREATE VIEW public.combatesevento AS
 
 
 ALTER VIEW public.combatesevento OWNER TO postgres;
+
+--
+-- Name: combatesluchador; Type: VIEW; Schema: public; Owner: postgres
+--
+
+CREATE VIEW public.combatesluchador AS
+ SELECT DISTINCT ON (c.id) c.id AS combate,
+    c.idevento AS evento,
+    l1.nombre AS luchador1,
+    l1.id AS idluchador1,
+    l1.imagen AS img1,
+    l2.nombre AS luchador2,
+    l2.id AS idluchador2,
+    l2.imagen AS img2,
+    c.victoria AS ganador
+   FROM ((((public."ParticipacionEnCombates" p1
+     JOIN public.luchadores l1 ON ((p1."idLuchador" = l1.id)))
+     JOIN public.combates c ON ((c.id = p1."idCombate")))
+     JOIN public."ParticipacionEnCombates" p2 ON (((c.id = p2."idCombate") AND (p1."idLuchador" <> p2."idLuchador"))))
+     JOIN public.luchadores l2 ON ((p2."idLuchador" = l2.id)))
+  ORDER BY c.id;
+
+
+ALTER VIEW public.combatesluchador OWNER TO postgres;
 
 --
 -- Name: eventos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -500,9 +541,9 @@ CREATE TABLE public.sugerencias (
     id integer NOT NULL,
     usuario character varying(255),
     correo character varying(255),
-    luchador1 character varying(255),
-    luchador2 character varying(255),
-    descripcion character varying(1000) DEFAULT NULL::character varying,
+    peleas character varying(255)[],
+    evento character varying(255),
+    descripcion character varying(255),
     "createdAt" timestamp with time zone NOT NULL,
     "updatedAt" timestamp with time zone NOT NULL
 );
@@ -565,7 +606,8 @@ CREATE TABLE public.users (
     id integer NOT NULL,
     usuario character varying(255) NOT NULL,
     correo character varying(255) NOT NULL,
-    clave character varying(255) NOT NULL
+    clave character varying(255) NOT NULL,
+    role character varying(255)
 );
 
 
@@ -667,6 +709,17 @@ COPY public."ParticipacionEnCombates" ("idLuchador", "idCombate", "createdAt", "
 
 
 --
+-- Data for Name: SequelizeMeta; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."SequelizeMeta" (name) FROM stdin;
+20240426193539-addDefensasToCampeones.cjs
+20240516113101-add_columns_to_luchadores.cjs
+20240516113431-add_columns_to_users.cjs
+\.
+
+
+--
 -- Data for Name: arbitros; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -684,7 +737,7 @@ COPY public.arbitros (id, nombre, "createdAt", "updatedAt") FROM stdin;
 -- Data for Name: campeones; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.campeones ("createdAt", "updatedAt", "idPeso", "idLuchador") FROM stdin;
+COPY public.campeones ("createdAt", "updatedAt", "idPeso", "idLuchador", defensas) FROM stdin;
 \.
 
 
@@ -722,92 +775,92 @@ COPY public.eventos (id, nombre, fecha, localizacion, "createdAt", "updatedAt") 
 -- Data for Name: luchadores; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.luchadores (id, nombre, edad, especialidad, victorias, derrotas, nacionalidad, imagen, "createdAt", "updatedAt", "pesoId", rango) FROM stdin;
-1	Brandon Moreno	28	Boxeo y Jiu-Jitsu	\N	\N	México	brandon.png	2024-04-29 07:58:34.451+00	2024-04-29 07:58:34.451+00	1	2
-73	Askar Askarov	28	Lucha	14	0	ru	askar_askarov.png	2024-05-10 18:28:15.727+00	2024-05-10 18:28:15.727+00	1	7
-78	Yair Rodríguez	29	Taekwondo y Jiu-Jitsu	13	2	mx	yair_rodriguez.png	2024-05-10 18:30:25.284+00	2024-05-10 18:30:25.284+00	2	6
-84	Rafael dos Anjos	37	Muay Thai y Jiu-Jitsu	30	13	br	rafael_dos_anjos.png	2024-05-10 18:31:42.095+00	2024-05-10 18:31:42.095+00	3	9
-88	Demian Maia	44	Jiu-Jitsu Brasileño	28	10	br	demian_maia.png	2024-05-10 18:32:40.699+00	2024-05-10 18:32:40.699+00	4	8
-96	Chris Weidman	37	Lucha colegial	15	6	us	chris_weidman.png	2024-05-10 18:34:03.199+00	2024-05-10 18:34:03.199+00	5	8
-100	Thiago Santos	38	Muay Thai	22	9	br	thiago_santos.png	2024-05-10 18:34:57.106+00	2024-05-10 18:34:57.106+00	6	9
-105	Curtis Blaydes	30	Lucha colegial	15	3	us	curtis_blaydes.png	2024-05-10 18:35:55.673+00	2024-05-10 18:35:55.673+00	7	8
-39	Jon Jones	34	Muay Thai y Lucha Libre	\N	\N	us	jonjones.png	2024-04-29 08:13:17.303+00	2024-04-29 08:13:17.303+00	7	0
-41	Sean Strickland	30	Striking	\N	\N	us	strickland.png	2024-05-08 13:54:30.544+00	2024-05-08 13:54:30.544+00	5	1
-26	Paulo Costa	30	Boxeo y Jiu-Jitsu Brasileño	\N	\N	br	paulo.png	2024-04-29 08:08:56.851+00	2024-04-29 08:08:56.851+00	5	4
-24	Israel Adesanya	32	Kickboxing	\N	\N	ng	adesanya.png	2024-04-29 08:08:56.851+00	2024-04-29 08:08:56.851+00	5	2
-28	Derek Brunson	37	Lucha libre	\N	\N	us	derek.png	2024-04-29 08:08:56.852+00	2024-04-29 08:08:56.852+00	5	5
-27	Jared Cannonier	37	Boxeo y Jiu-Jitsu Brasileño	\N	\N	us	jared.png	2024-04-29 08:08:56.851+00	2024-04-29 08:08:56.851+00	5	6
-32	Jiri Prochazka	28	Karate	\N	\N	República Checa	jiri.png	2024-04-29 08:12:46.902+00	2024-04-29 08:12:46.902+00	6	2
-29	Jan Błachowicz	38	Judo y Kickboxing	\N	\N	Polonia	jan.png	2024-04-29 08:12:46.901+00	2024-04-29 08:12:46.901+00	6	3
-33	Magomed Ankalaev	29	Sambo	\N	\N	ru	ankalaev.png	2024-04-29 08:12:46.902+00	2024-04-29 08:12:46.902+00	6	4
-30	Glover Teixeira	42	Jiu-Jitsu Brasileño	\N	\N	br	glover.png	2024-04-29 08:12:46.901+00	2024-04-29 08:12:46.901+00	6	5
-31	Aleksandar Rakić	29	Kickboxing	\N	\N	Austria	rakic.png	2024-04-29 08:12:46.902+00	2024-04-29 08:12:46.902+00	6	6
-36	Ciryl Gane	31	Muay Thai	\N	\N	Francia	gane.png	2024-04-29 08:13:17.303+00	2024-04-29 08:13:17.303+00	7	2
-38	Derrick Lewis	36	Boxeo	\N	\N	us	derrick.png	2024-04-29 08:13:17.303+00	2024-04-29 08:13:17.303+00	7	5
-35	Stipe Miocic	38	Lucha colegial	\N	\N	us	miocic.png	2024-04-29 08:13:17.303+00	2024-04-29 08:13:17.303+00	7	3
-34	Francis Ngannou	34	Boxeo y Jiu-Jitsu Brasileño	\N	\N	Camerún	ngannou.png	2024-04-29 08:13:17.303+00	2024-04-29 08:13:17.303+00	7	6
-74	Joseph Benavidez	37	Lucha y Jiu-Jitsu	28	8	us	joseph_benavidez.png	2024-05-10 18:28:15.726+00	2024-05-10 18:28:15.726+00	1	5
-71	Song Yadong	24	Sanda y Jiu-Jitsu	17	5	China	song.png	2024-05-10 09:54:53.203+00	2024-05-10 09:54:53.203+00	8	7
-82	Arnold Allen	28	Jiu-Jitsu	17	1	uk	arnold_allen.png	2024-05-10 18:30:25.285+00	2024-05-10 18:30:25.285+00	2	10
-83	Beneil Dariush	32	Lucha y Jiu-Jitsu	21	4	us	beneil_dariush.png	2024-05-10 18:31:42.095+00	2024-05-10 18:31:42.095+00	3	8
-89	Stephen Thompson	39	Kickboxing	16	5	us	stephen_thompson.png	2024-05-10 18:32:40.699+00	2024-05-10 18:32:40.699+00	4	6
-93	Jack Hermansson	33	Lucha	22	6	se	jack_hermansson.png	2024-05-10 18:34:03.199+00	2024-05-10 18:34:03.199+00	5	10
-98	Anthony Smith	33	Lucha colegial	35	17	us	anthony_smith.png	2024-05-10 18:34:57.106+00	2024-05-10 18:34:57.106+00	6	8
-104	Marcin Tybura	35	Judo	24	7	pl	tybura.png	2024-05-10 18:35:55.673+00	2024-05-10 18:35:55.673+00	7	10
-72	Alex Perez	29	Lucha y Jiu-Jitsu	24	6	us	alex_perez.png	2024-05-10 18:28:15.727+00	2024-05-10 18:28:15.727+00	1	6
-77	Brandon Royval	29	Jiu-Jitsu	12	6	us	brandon_royval.png	2024-05-10 18:28:15.728+00	2024-05-10 18:28:15.728+00	1	10
-81	Josh Emmett	36	Boxeo	16	2	us	josh_emmett.png	2024-05-10 18:30:25.285+00	2024-05-10 18:30:25.285+00	2	7
-85	Dan Hooker	31	Muay Thai y Jiu-Jitsu	21	11	nz	dan_hooker.png	2024-05-10 18:31:42.095+00	2024-05-10 18:31:42.095+00	3	7
-91	Jorge Masvidal	37	Boxeo y Lucha	35	15	us	jorge_masvidal.png	2024-05-10 18:32:40.699+00	2024-05-10 18:32:40.699+00	4	7
-95	Uriah Hall	37	Karate	17	10	jm	uriah_hall.png	2024-05-10 18:34:03.199+00	2024-05-10 18:34:03.199+00	5	7
-97	Ryan Spann	30	Jiu-Jitsu	20	7	us	ryan_spann.png	2024-05-10 18:34:57.106+00	2024-05-10 18:34:57.106+00	6	10
-106	Raulian Paiva	26	Muay Thai y BJJ	8	2	Brasil	paiva.png	2024-05-10 18:38:21.229+00	2024-05-10 18:38:21.229+00	\N	10
-75	David Dvorak	29	Boxeo y Jiu-Jitsu	20	3	cz	david_dvorak.png	2024-05-10 18:28:15.728+00	2024-05-10 18:28:15.728+00	1	9
-70	José Aldo	35	Muay Thai y BJJ	29	13	Brasil	aldo.png	2024-05-10 09:54:53.203+00	2024-05-10 09:54:53.203+00	8	8
-80	Bryce Mitchell	27	Lucha y Jiu-Jitsu	14	0	us	bryce_mitchell.png	2024-05-10 18:30:25.285+00	2024-05-10 18:30:25.285+00	2	9
-87	Paul Felder	37	Muay Thai	17	7	us	paul_felder.png	2024-05-10 18:31:42.094+00	2024-05-10 18:31:42.094+00	3	6
-90	Geoff Neal	31	Boxeo	13	5	us	geoff_neal.png	2024-05-10 18:32:40.699+00	2024-05-10 18:32:40.699+00	4	10
-94	Kelvin Gastelum	30	Lucha colegial	17	7	us	kelvin_gastelum.png	2024-05-10 18:34:03.199+00	2024-05-10 18:34:03.199+00	5	9
-11	Ilia Topuria	24	Lucha	\N	\N	ge	ilia.png	2024-04-29 08:01:18.339+00	2024-04-29 08:01:18.339+00	2	0
-9	Max Holloway	29	Boxeo y Jiu-Jitsu	\N	\N	us	max.png	2024-04-29 08:01:18.338+00	2024-04-29 08:01:18.338+00	2	2
-12	Charles Oliveira	32	Jiu-Jitsu Brasileño	\N	\N	br	iliveira.png	2024-04-29 08:04:51.097+00	2024-04-29 08:04:51.097+00	3	1
-14	Michael Chandler	35	Lucha colegial	\N	\N	us	chandler.png	2024-04-29 08:04:51.097+00	2024-04-29 08:04:51.097+00	3	4
-13	Justin Gaethje	32	Lucha colegial	\N	\N	us	justin.png	2024-04-29 08:04:51.097+00	2024-04-29 08:04:51.097+00	3	3
-76	Kai Kara-France	28	Boxeo y Jiu-Jitsu	22	9	nz	kai_kara_france.png	2024-05-10 18:28:15.727+00	2024-05-10 18:28:15.727+00	1	8
-3	Alexandre Pantoja	31	Muay Thai y Jiu-Jitsu	\N	\N	br	pantoja.png	2024-04-29 07:58:34.452+00	2024-04-29 07:58:34.452+00	1	0
-2	Demetrious Johnson	34	Lucha y Jiu-Jitsu	\N	\N	us	demetrius.png	2024-04-29 07:58:34.451+00	2024-04-29 07:58:34.451+00	1	4
-4	Deiveson Figueiredo	33	Muay Thai y Jiu-Jitsu	21	2	br	figue.png	2024-04-29 07:58:34.452+00	2024-04-29 07:58:34.452+00	1	1
-8	Zabit Magomedsharipov	30	Sambo y Jiu-Jitsu	\N	\N	ru	zabit.png	2024-04-29 08:01:18.338+00	2024-04-29 08:01:18.338+00	2	5
-10	Brian Ortega	30	Jiu-Jitsu	\N	\N	us	ortega.png	2024-04-29 08:01:18.338+00	2024-04-29 08:01:18.338+00	2	3
-17	Islam Makhachev	30	Sambo	\N	\N	ru	islam.png	2024-04-29 08:04:51.097+00	2024-04-29 08:04:51.097+00	3	0
-16	Dustin Poirier	33	Boxeo y Jiu-Jitsu Brasileño	\N	\N	us	dustin.png	2024-04-29 08:04:51.097+00	2024-04-29 08:04:51.097+00	3	2
-15	Tony Ferguson	38	Jiu-Jitsu Brasileño	\N	\N	us	tony.png	2024-04-29 08:04:51.097+00	2024-04-29 08:04:51.097+00	3	5
-20	Gilbert Burns	35	Jiu-Jitsu Brasileño	\N	\N	br	gilbert.png	2024-04-29 08:06:51.028+00	2024-04-29 08:06:51.028+00	4	4
-22	Leon Edwards	30	Kickboxing	\N	\N	Jamaica	leon.png	2024-04-29 08:06:51.028+00	2024-04-29 08:06:51.028+00	4	0
-21	Vicente Luque	29	Jiu-Jitsu Brasileño	\N	\N	br	vicente.png	2024-04-29 08:06:51.028+00	2024-04-29 08:06:51.028+00	4	5
-18	Colby Covington	33	Lucha colegial	\N	\N	us	colby.png	2024-04-29 08:06:51.028+00	2024-04-29 08:06:51.028+00	4	3
-19	Kamaru Usman	34	Lucha colegial	\N	\N	Nigeria	usman.png	2024-04-29 08:06:51.028+00	2024-04-29 08:06:51.028+00	4	1
-5	Askar Askarov	28	Lucha	\N	\N	ru	askar_askarov.png	2024-04-29 07:58:34.452+00	2024-04-29 07:58:34.452+00	1	3
-6	Alexander Volkanovski	32	Boxeo y Lucha	26	4	au	volka.png	2024-04-29 08:01:18.338+00	2024-04-29 08:01:18.338+00	2	1
-63	Sean O'Malley	27	Striking	10	2	Estados Unidos	sugar.png	2024-05-10 09:54:53.202+00	2024-05-10 09:54:53.202+00	8	0
-64	Marlon Vera	29	Muay Thai y BJJ	15	7	Ecuador	vera.png	2024-05-10 09:54:53.203+00	2024-05-10 09:54:53.203+00	8	4
-65	Petr Yan	28	Boxeo y Sambo	16	2	Rusia	yan.png	2024-05-10 09:54:53.203+00	2024-05-10 09:54:53.203+00	8	3
-62	Cory Sandhagen	29	Muay Thai y BJJ	12	3	Estados Unidos	cory.png	2024-05-10 09:54:53.202+00	2024-05-10 09:54:53.202+00	8	2
-66	Merab Dvalishvili	30	Lucha	8	3	Georgia	merab.png	2024-05-10 09:54:53.202+00	2024-05-10 09:54:53.202+00	8	1
-67	Henry Cejudo	34	Lucha olímpica y Boxeo	16	3	Estados Unidos	cejudo.png	2024-05-10 09:54:53.203+00	2024-05-10 09:54:53.203+00	8	5
-69	Rob Font	34	Boxeo	19	4	Estados Unidos	rob.png	2024-05-10 09:54:53.203+00	2024-05-10 09:54:53.203+00	8	9
-79	Shane Burgos	30	Boxeo	13	3	us	shane_burgos.png	2024-05-10 18:30:25.285+00	2024-05-10 18:30:25.285+00	2	8
-42	Dricus Du Plessis	27	Boxeo y Jiu-Jitsu	\N	\N	Sudáfrica	dricus.png	2024-05-10 09:51:55.837+00	2024-05-10 09:51:55.837+00	5	0
-40	Tom Aspinall	28	Boxeo y Jiu-Jitsu Brasileño	\N	\N	gb-eng	tom-aspinall.png	2024-04-29 08:13:17.303+00	2024-04-29 08:13:17.303+00	7	1
-86	Islam Makhachev	30	Sambo	\N	\N	ru	islam.png	2024-05-10 18:31:42.095+00	2024-05-10 18:31:42.095+00	3	10
-23	Alex Poatan Pereira	35	Kickboxing	\N	\N	br	pereira.png	2024-04-29 08:08:56.851+00	2024-04-29 08:08:56.851+00	6	0
-25	Robert Whittaker	31	Karate y Hapkido	\N	\N	us	whittaker.png	2024-04-29 08:08:56.851+00	2024-04-29 08:08:56.851+00	5	3
-7	Chan Sung Jung	34	Boxeo y Taekwondo	\N	\N	Corea del Sur	chang.png	2024-04-29 08:01:18.338+00	2024-04-29 08:01:18.338+00	2	4
-92	Neil Magny	34	Lucha y Jiu-Jitsu	25	10	us	neil_magny.png	2024-05-10 18:32:40.699+00	2024-05-10 18:32:40.699+00	4	9
-99	Dominick Reyes	32	Boxeo	12	3	us	dominick_reyes.png	2024-05-10 18:34:57.106+00	2024-05-10 18:34:57.106+00	6	7
-102	Jairzinho Rozenstruik	33	Kickboxing	13	2	sr	rozenstruik.png	2024-05-10 18:35:55.673+00	2024-05-10 18:35:55.673+00	7	9
-103	Alistair Overeem	42	Kickboxing y Jiu-Jitsu Brasileño	47	19	nl	overeem.png	2024-05-10 18:35:55.673+00	2024-05-10 18:35:55.673+00	7	7
-37	Alexander Volkov	33	Boxeo y Sambo	\N	\N	ru	volkov.png	2024-04-29 08:13:17.303+00	2024-04-29 08:13:17.303+00	7	4
+COPY public.luchadores (id, nombre, edad, especialidad, victorias, derrotas, nacionalidad, imagen, "createdAt", "updatedAt", "pesoId", rango, altura, finalizaciones, kos, decisiones, alias) FROM stdin;
+1	Brandon Moreno	28	Boxeo y Jiu-Jitsu	\N	\N	México	brandon.png	2024-04-29 07:58:34.451+00	2024-04-29 07:58:34.451+00	1	2	\N	\N	\N	\N	\N
+73	Askar Askarov	28	Lucha	14	0	ru	askar_askarov.png	2024-05-10 18:28:15.727+00	2024-05-10 18:28:15.727+00	1	7	\N	\N	\N	\N	\N
+78	Yair Rodríguez	29	Taekwondo y Jiu-Jitsu	13	2	mx	yair_rodriguez.png	2024-05-10 18:30:25.284+00	2024-05-10 18:30:25.284+00	2	6	\N	\N	\N	\N	\N
+84	Rafael dos Anjos	37	Muay Thai y Jiu-Jitsu	30	13	br	rafael_dos_anjos.png	2024-05-10 18:31:42.095+00	2024-05-10 18:31:42.095+00	3	9	\N	\N	\N	\N	\N
+88	Demian Maia	44	Jiu-Jitsu Brasileño	28	10	br	demian_maia.png	2024-05-10 18:32:40.699+00	2024-05-10 18:32:40.699+00	4	8	\N	\N	\N	\N	\N
+96	Chris Weidman	37	Lucha colegial	15	6	us	chris_weidman.png	2024-05-10 18:34:03.199+00	2024-05-10 18:34:03.199+00	5	8	\N	\N	\N	\N	\N
+100	Thiago Santos	38	Muay Thai	22	9	br	thiago_santos.png	2024-05-10 18:34:57.106+00	2024-05-10 18:34:57.106+00	6	9	\N	\N	\N	\N	\N
+105	Curtis Blaydes	30	Lucha colegial	15	3	us	curtis_blaydes.png	2024-05-10 18:35:55.673+00	2024-05-10 18:35:55.673+00	7	8	\N	\N	\N	\N	\N
+39	Jon Jones	34	Muay Thai y Lucha Libre	\N	\N	us	jonjones.png	2024-04-29 08:13:17.303+00	2024-04-29 08:13:17.303+00	7	0	\N	\N	\N	\N	\N
+41	Sean Strickland	30	Striking	\N	\N	us	strickland.png	2024-05-08 13:54:30.544+00	2024-05-08 13:54:30.544+00	5	1	\N	\N	\N	\N	\N
+26	Paulo Costa	30	Boxeo y Jiu-Jitsu Brasileño	\N	\N	br	paulo.png	2024-04-29 08:08:56.851+00	2024-04-29 08:08:56.851+00	5	4	\N	\N	\N	\N	\N
+24	Israel Adesanya	32	Kickboxing	\N	\N	ng	adesanya.png	2024-04-29 08:08:56.851+00	2024-04-29 08:08:56.851+00	5	2	\N	\N	\N	\N	\N
+28	Derek Brunson	37	Lucha libre	\N	\N	us	derek.png	2024-04-29 08:08:56.852+00	2024-04-29 08:08:56.852+00	5	5	\N	\N	\N	\N	\N
+27	Jared Cannonier	37	Boxeo y Jiu-Jitsu Brasileño	\N	\N	us	jared.png	2024-04-29 08:08:56.851+00	2024-04-29 08:08:56.851+00	5	6	\N	\N	\N	\N	\N
+32	Jiri Prochazka	28	Karate	\N	\N	República Checa	jiri.png	2024-04-29 08:12:46.902+00	2024-04-29 08:12:46.902+00	6	2	\N	\N	\N	\N	\N
+29	Jan Błachowicz	38	Judo y Kickboxing	\N	\N	Polonia	jan.png	2024-04-29 08:12:46.901+00	2024-04-29 08:12:46.901+00	6	3	\N	\N	\N	\N	\N
+33	Magomed Ankalaev	29	Sambo	\N	\N	ru	ankalaev.png	2024-04-29 08:12:46.902+00	2024-04-29 08:12:46.902+00	6	4	\N	\N	\N	\N	\N
+30	Glover Teixeira	42	Jiu-Jitsu Brasileño	\N	\N	br	glover.png	2024-04-29 08:12:46.901+00	2024-04-29 08:12:46.901+00	6	5	\N	\N	\N	\N	\N
+31	Aleksandar Rakić	29	Kickboxing	\N	\N	Austria	rakic.png	2024-04-29 08:12:46.902+00	2024-04-29 08:12:46.902+00	6	6	\N	\N	\N	\N	\N
+36	Ciryl Gane	31	Muay Thai	\N	\N	Francia	gane.png	2024-04-29 08:13:17.303+00	2024-04-29 08:13:17.303+00	7	2	\N	\N	\N	\N	\N
+38	Derrick Lewis	36	Boxeo	\N	\N	us	derrick.png	2024-04-29 08:13:17.303+00	2024-04-29 08:13:17.303+00	7	5	\N	\N	\N	\N	\N
+35	Stipe Miocic	38	Lucha colegial	\N	\N	us	miocic.png	2024-04-29 08:13:17.303+00	2024-04-29 08:13:17.303+00	7	3	\N	\N	\N	\N	\N
+34	Francis Ngannou	34	Boxeo y Jiu-Jitsu Brasileño	\N	\N	Camerún	ngannou.png	2024-04-29 08:13:17.303+00	2024-04-29 08:13:17.303+00	7	6	\N	\N	\N	\N	\N
+74	Joseph Benavidez	37	Lucha y Jiu-Jitsu	28	8	us	joseph_benavidez.png	2024-05-10 18:28:15.726+00	2024-05-10 18:28:15.726+00	1	5	\N	\N	\N	\N	\N
+71	Song Yadong	24	Sanda y Jiu-Jitsu	17	5	China	song.png	2024-05-10 09:54:53.203+00	2024-05-10 09:54:53.203+00	8	7	\N	\N	\N	\N	\N
+82	Arnold Allen	28	Jiu-Jitsu	17	1	uk	arnold_allen.png	2024-05-10 18:30:25.285+00	2024-05-10 18:30:25.285+00	2	10	\N	\N	\N	\N	\N
+83	Beneil Dariush	32	Lucha y Jiu-Jitsu	21	4	us	beneil_dariush.png	2024-05-10 18:31:42.095+00	2024-05-10 18:31:42.095+00	3	8	\N	\N	\N	\N	\N
+89	Stephen Thompson	39	Kickboxing	16	5	us	stephen_thompson.png	2024-05-10 18:32:40.699+00	2024-05-10 18:32:40.699+00	4	6	\N	\N	\N	\N	\N
+93	Jack Hermansson	33	Lucha	22	6	se	jack_hermansson.png	2024-05-10 18:34:03.199+00	2024-05-10 18:34:03.199+00	5	10	\N	\N	\N	\N	\N
+98	Anthony Smith	33	Lucha colegial	35	17	us	anthony_smith.png	2024-05-10 18:34:57.106+00	2024-05-10 18:34:57.106+00	6	8	\N	\N	\N	\N	\N
+104	Marcin Tybura	35	Judo	24	7	pl	tybura.png	2024-05-10 18:35:55.673+00	2024-05-10 18:35:55.673+00	7	10	\N	\N	\N	\N	\N
+72	Alex Perez	29	Lucha y Jiu-Jitsu	24	6	us	alex_perez.png	2024-05-10 18:28:15.727+00	2024-05-10 18:28:15.727+00	1	6	\N	\N	\N	\N	\N
+77	Brandon Royval	29	Jiu-Jitsu	12	6	us	brandon_royval.png	2024-05-10 18:28:15.728+00	2024-05-10 18:28:15.728+00	1	10	\N	\N	\N	\N	\N
+81	Josh Emmett	36	Boxeo	16	2	us	josh_emmett.png	2024-05-10 18:30:25.285+00	2024-05-10 18:30:25.285+00	2	7	\N	\N	\N	\N	\N
+85	Dan Hooker	31	Muay Thai y Jiu-Jitsu	21	11	nz	dan_hooker.png	2024-05-10 18:31:42.095+00	2024-05-10 18:31:42.095+00	3	7	\N	\N	\N	\N	\N
+91	Jorge Masvidal	37	Boxeo y Lucha	35	15	us	jorge_masvidal.png	2024-05-10 18:32:40.699+00	2024-05-10 18:32:40.699+00	4	7	\N	\N	\N	\N	\N
+95	Uriah Hall	37	Karate	17	10	jm	uriah_hall.png	2024-05-10 18:34:03.199+00	2024-05-10 18:34:03.199+00	5	7	\N	\N	\N	\N	\N
+97	Ryan Spann	30	Jiu-Jitsu	20	7	us	ryan_spann.png	2024-05-10 18:34:57.106+00	2024-05-10 18:34:57.106+00	6	10	\N	\N	\N	\N	\N
+106	Raulian Paiva	26	Muay Thai y BJJ	8	2	Brasil	paiva.png	2024-05-10 18:38:21.229+00	2024-05-10 18:38:21.229+00	\N	10	\N	\N	\N	\N	\N
+75	David Dvorak	29	Boxeo y Jiu-Jitsu	20	3	cz	david_dvorak.png	2024-05-10 18:28:15.728+00	2024-05-10 18:28:15.728+00	1	9	\N	\N	\N	\N	\N
+70	José Aldo	35	Muay Thai y BJJ	29	13	Brasil	aldo.png	2024-05-10 09:54:53.203+00	2024-05-10 09:54:53.203+00	8	8	\N	\N	\N	\N	\N
+80	Bryce Mitchell	27	Lucha y Jiu-Jitsu	14	0	us	bryce_mitchell.png	2024-05-10 18:30:25.285+00	2024-05-10 18:30:25.285+00	2	9	\N	\N	\N	\N	\N
+87	Paul Felder	37	Muay Thai	17	7	us	paul_felder.png	2024-05-10 18:31:42.094+00	2024-05-10 18:31:42.094+00	3	6	\N	\N	\N	\N	\N
+90	Geoff Neal	31	Boxeo	13	5	us	geoff_neal.png	2024-05-10 18:32:40.699+00	2024-05-10 18:32:40.699+00	4	10	\N	\N	\N	\N	\N
+94	Kelvin Gastelum	30	Lucha colegial	17	7	us	kelvin_gastelum.png	2024-05-10 18:34:03.199+00	2024-05-10 18:34:03.199+00	5	9	\N	\N	\N	\N	\N
+9	Max Holloway	29	Boxeo y Jiu-Jitsu	\N	\N	us	max.png	2024-04-29 08:01:18.338+00	2024-04-29 08:01:18.338+00	2	2	\N	\N	\N	\N	\N
+14	Michael Chandler	35	Lucha colegial	\N	\N	us	chandler.png	2024-04-29 08:04:51.097+00	2024-04-29 08:04:51.097+00	3	4	\N	\N	\N	\N	\N
+13	Justin Gaethje	32	Lucha colegial	\N	\N	us	justin.png	2024-04-29 08:04:51.097+00	2024-04-29 08:04:51.097+00	3	3	\N	\N	\N	\N	\N
+76	Kai Kara-France	28	Boxeo y Jiu-Jitsu	22	9	nz	kai_kara_france.png	2024-05-10 18:28:15.727+00	2024-05-10 18:28:15.727+00	1	8	\N	\N	\N	\N	\N
+3	Alexandre Pantoja	31	Muay Thai y Jiu-Jitsu	\N	\N	br	pantoja.png	2024-04-29 07:58:34.452+00	2024-04-29 07:58:34.452+00	1	0	\N	\N	\N	\N	\N
+2	Demetrious Johnson	34	Lucha y Jiu-Jitsu	\N	\N	us	demetrius.png	2024-04-29 07:58:34.451+00	2024-04-29 07:58:34.451+00	1	4	\N	\N	\N	\N	\N
+4	Deiveson Figueiredo	33	Muay Thai y Jiu-Jitsu	21	2	br	figue.png	2024-04-29 07:58:34.452+00	2024-04-29 07:58:34.452+00	1	1	\N	\N	\N	\N	\N
+8	Zabit Magomedsharipov	30	Sambo y Jiu-Jitsu	\N	\N	ru	zabit.png	2024-04-29 08:01:18.338+00	2024-04-29 08:01:18.338+00	2	5	\N	\N	\N	\N	\N
+10	Brian Ortega	30	Jiu-Jitsu	\N	\N	us	ortega.png	2024-04-29 08:01:18.338+00	2024-04-29 08:01:18.338+00	2	3	\N	\N	\N	\N	\N
+17	Islam Makhachev	30	Sambo	\N	\N	ru	islam.png	2024-04-29 08:04:51.097+00	2024-04-29 08:04:51.097+00	3	0	\N	\N	\N	\N	\N
+16	Dustin Poirier	33	Boxeo y Jiu-Jitsu Brasileño	\N	\N	us	dustin.png	2024-04-29 08:04:51.097+00	2024-04-29 08:04:51.097+00	3	2	\N	\N	\N	\N	\N
+15	Tony Ferguson	38	Jiu-Jitsu Brasileño	\N	\N	us	tony.png	2024-04-29 08:04:51.097+00	2024-04-29 08:04:51.097+00	3	5	\N	\N	\N	\N	\N
+20	Gilbert Burns	35	Jiu-Jitsu Brasileño	\N	\N	br	gilbert.png	2024-04-29 08:06:51.028+00	2024-04-29 08:06:51.028+00	4	4	\N	\N	\N	\N	\N
+22	Leon Edwards	30	Kickboxing	\N	\N	Jamaica	leon.png	2024-04-29 08:06:51.028+00	2024-04-29 08:06:51.028+00	4	0	\N	\N	\N	\N	\N
+21	Vicente Luque	29	Jiu-Jitsu Brasileño	\N	\N	br	vicente.png	2024-04-29 08:06:51.028+00	2024-04-29 08:06:51.028+00	4	5	\N	\N	\N	\N	\N
+18	Colby Covington	33	Lucha colegial	\N	\N	us	colby.png	2024-04-29 08:06:51.028+00	2024-04-29 08:06:51.028+00	4	3	\N	\N	\N	\N	\N
+19	Kamaru Usman	34	Lucha colegial	\N	\N	Nigeria	usman.png	2024-04-29 08:06:51.028+00	2024-04-29 08:06:51.028+00	4	1	\N	\N	\N	\N	\N
+5	Askar Askarov	28	Lucha	\N	\N	ru	askar_askarov.png	2024-04-29 07:58:34.452+00	2024-04-29 07:58:34.452+00	1	3	\N	\N	\N	\N	\N
+6	Alexander Volkanovski	32	Boxeo y Lucha	26	4	au	volka.png	2024-04-29 08:01:18.338+00	2024-04-29 08:01:18.338+00	2	1	\N	\N	\N	\N	\N
+63	Sean O'Malley	27	Striking	10	2	Estados Unidos	sugar.png	2024-05-10 09:54:53.202+00	2024-05-10 09:54:53.202+00	8	0	\N	\N	\N	\N	\N
+64	Marlon Vera	29	Muay Thai y BJJ	15	7	Ecuador	vera.png	2024-05-10 09:54:53.203+00	2024-05-10 09:54:53.203+00	8	4	\N	\N	\N	\N	\N
+65	Petr Yan	28	Boxeo y Sambo	16	2	Rusia	yan.png	2024-05-10 09:54:53.203+00	2024-05-10 09:54:53.203+00	8	3	\N	\N	\N	\N	\N
+62	Cory Sandhagen	29	Muay Thai y BJJ	12	3	Estados Unidos	cory.png	2024-05-10 09:54:53.202+00	2024-05-10 09:54:53.202+00	8	2	\N	\N	\N	\N	\N
+66	Merab Dvalishvili	30	Lucha	8	3	Georgia	merab.png	2024-05-10 09:54:53.202+00	2024-05-10 09:54:53.202+00	8	1	\N	\N	\N	\N	\N
+67	Henry Cejudo	34	Lucha olímpica y Boxeo	16	3	Estados Unidos	cejudo.png	2024-05-10 09:54:53.203+00	2024-05-10 09:54:53.203+00	8	5	\N	\N	\N	\N	\N
+69	Rob Font	34	Boxeo	19	4	Estados Unidos	rob.png	2024-05-10 09:54:53.203+00	2024-05-10 09:54:53.203+00	8	9	\N	\N	\N	\N	\N
+79	Shane Burgos	30	Boxeo	13	3	us	shane_burgos.png	2024-05-10 18:30:25.285+00	2024-05-10 18:30:25.285+00	2	8	\N	\N	\N	\N	\N
+42	Dricus Du Plessis	27	Boxeo y Jiu-Jitsu	\N	\N	Sudáfrica	dricus.png	2024-05-10 09:51:55.837+00	2024-05-10 09:51:55.837+00	5	0	\N	\N	\N	\N	\N
+40	Tom Aspinall	28	Boxeo y Jiu-Jitsu Brasileño	\N	\N	gb-eng	tom-aspinall.png	2024-04-29 08:13:17.303+00	2024-04-29 08:13:17.303+00	7	1	\N	\N	\N	\N	\N
+86	Islam Makhachev	30	Sambo	\N	\N	ru	islam.png	2024-05-10 18:31:42.095+00	2024-05-10 18:31:42.095+00	3	10	\N	\N	\N	\N	\N
+23	Alex Poatan Pereira	35	Kickboxing	\N	\N	br	pereira.png	2024-04-29 08:08:56.851+00	2024-04-29 08:08:56.851+00	6	0	\N	\N	\N	\N	\N
+25	Robert Whittaker	31	Karate y Hapkido	\N	\N	us	whittaker.png	2024-04-29 08:08:56.851+00	2024-04-29 08:08:56.851+00	5	3	\N	\N	\N	\N	\N
+7	Chan Sung Jung	34	Boxeo y Taekwondo	\N	\N	Corea del Sur	chang.png	2024-04-29 08:01:18.338+00	2024-04-29 08:01:18.338+00	2	4	\N	\N	\N	\N	\N
+92	Neil Magny	34	Lucha y Jiu-Jitsu	25	10	us	neil_magny.png	2024-05-10 18:32:40.699+00	2024-05-10 18:32:40.699+00	4	9	\N	\N	\N	\N	\N
+99	Dominick Reyes	32	Boxeo	12	3	us	dominick_reyes.png	2024-05-10 18:34:57.106+00	2024-05-10 18:34:57.106+00	6	7	\N	\N	\N	\N	\N
+102	Jairzinho Rozenstruik	33	Kickboxing	13	2	sr	rozenstruik.png	2024-05-10 18:35:55.673+00	2024-05-10 18:35:55.673+00	7	9	\N	\N	\N	\N	\N
+103	Alistair Overeem	42	Kickboxing y Jiu-Jitsu Brasileño	47	19	nl	overeem.png	2024-05-10 18:35:55.673+00	2024-05-10 18:35:55.673+00	7	7	\N	\N	\N	\N	\N
+37	Alexander Volkov	33	Boxeo y Sambo	\N	\N	ru	volkov.png	2024-04-29 08:13:17.303+00	2024-04-29 08:13:17.303+00	7	4	\N	\N	\N	\N	\N
+12	Charles Oliveira	32	Jiu-Jitsu Brasileño	36	14	br	iliveira.png	2024-04-29 08:04:51.097+00	2024-04-29 08:04:51.097+00	3	1	1.78	17	2	12	Do Bronx
+11	Ilia Topuria	24	Lucha	15	0	ge	ilia.png	2024-04-29 08:01:18.339+00	2024-04-29 08:01:18.339+00	2	0	1.67	8	4	3	El Matador
 \.
 
 
@@ -831,11 +884,11 @@ COPY public.pesos (id, nombre, "createdAt", "updatedAt") FROM stdin;
 -- Data for Name: sugerencias; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.sugerencias (id, usuario, correo, luchador1, luchador2, descripcion, "createdAt", "updatedAt") FROM stdin;
-3	juan	juan@gmail.com	Mario	Joselu	Estaria de locos	2024-05-14 11:47:22.123+00	2024-05-14 11:47:22.123+00
-2	Jacinto	\N	\N	\N	\N	2024-05-14 11:45:13.923+00	2024-05-14 11:49:13.488+00
-4	Alex	pruebita@gmail.com	Merab Dvalishvili	Sean O'Malley	Pelea por el titulo	2024-05-14 13:11:58.474+00	2024-05-14 13:11:58.474+00
-5	Alex	pruebita@gmail.com	Jorge Masvidal	Vicente Luque	Pelea por el titulo	2024-05-14 13:14:01.844+00	2024-05-14 13:14:01.844+00
+COPY public.sugerencias (id, usuario, correo, peleas, evento, descripcion, "createdAt", "updatedAt") FROM stdin;
+5	Macario	pruebita@gmail.com	{"Justin Gaethje","Charles Oliveira","Tony Ferguson"}	432	rstdryertyewt	2024-05-16 12:20:28.469+00	2024-05-16 12:20:28.469+00
+6			{}	89		2024-05-16 12:29:01.528+00	2024-05-16 12:29:01.528+00
+7			{}	0		2024-05-16 12:29:30.135+00	2024-05-16 12:29:30.135+00
+8	Macario	evaristo67@hotmail.com	{"Deiveson Figueiredo","Alexandre Pantoja","Gilbert Burns","Colby Covington"}	309	Buenas tardes	2024-05-16 22:14:50.065+00	2024-05-16 22:14:50.065+00
 \.
 
 
@@ -843,8 +896,13 @@ COPY public.sugerencias (id, usuario, correo, luchador1, luchador2, descripcion,
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.users (id, usuario, correo, clave) FROM stdin;
-1	manolo8	jerarde@gmail.com	$2b$10$g2NPEN.t0dIiATUJiDOQlOlBSl94NC5CB4l7I9b3jSYGKpU5UBWwe
+COPY public.users (id, usuario, correo, clave, role) FROM stdin;
+2	admin	admin@admin.com	$2b$10$kfBFP60PyvvqHpVC7oAF.OHqVcwQXeHf7C46a62UukUvQHEdRkEhu	admin
+1	manolo8	jerarde@gmail.com	$2b$10$g2NPEN.t0dIiATUJiDOQlOlBSl94NC5CB4l7I9b3jSYGKpU5UBWwe	normal
+3	admin2	admin2@admin.com	$2b$10$9Z7VBycQ8JLjHNPnyiLUa.1g8w2zc5SAJ0FN91XXVbjMQzd9l2B0W	admin
+4	prueba1	pruebita@gmail.com	$2b$10$RtsVJyH2xzDGG0fl9A/1Be94nQqoh/MvsntdUhdS3UqNg5GTbsOEe	normal
+6	sdsas	asdasdasd@sdsdsd.com	$2b$10$QRrmPrec562z5Hdu.02hwuh3/Wf/.BYVZheCiqw6dAJR7fviJFlHi	normal
+7	Juan	alexgarciaperez9710@gmail.com	$2b$10$JEdrAvGd3KXcooVUuJAX/.mMBlUUMhVXVUS6RfaZINjr/pQWQeztO	normal
 \.
 
 
@@ -887,14 +945,14 @@ SELECT pg_catalog.setval('public.pesos_id_seq', 8, true);
 -- Name: sugerencias_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.sugerencias_id_seq', 5, true);
+SELECT pg_catalog.setval('public.sugerencias_id_seq', 8, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 1, true);
+SELECT pg_catalog.setval('public.users_id_seq', 7, true);
 
 
 --
@@ -903,6 +961,14 @@ SELECT pg_catalog.setval('public.users_id_seq', 1, true);
 
 ALTER TABLE ONLY public."ParticipacionEnCombates"
     ADD CONSTRAINT "ParticipacionEnCombates_pkey" PRIMARY KEY ("idLuchador", "idCombate");
+
+
+--
+-- Name: SequelizeMeta SequelizeMeta_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."SequelizeMeta"
+    ADD CONSTRAINT "SequelizeMeta_pkey" PRIMARY KEY (name);
 
 
 --
