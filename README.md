@@ -16,6 +16,7 @@ https://front-angular-ufc.vercel.app/home
 ## Guia para Dockerizar backend
 [Dockerizar API Nodejs y Datos Postgress](docker.md)
   
+  Login - Usuario: manolo8 - contraseña : onmula
 **-----------------------------------------------------**  
   
     
