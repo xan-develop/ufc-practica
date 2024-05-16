@@ -3,7 +3,8 @@ import { LuchadorService } from '../../service/luchador.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin, Observable, switchMap } from 'rxjs';
-import { LuchadorInter, Pelea } from './luchador-inter';
+import { listacombates, LuchadorInter, Pelea } from './luchador-inter';
+import { CombatesService } from '../../service/combates.service';
 
 @Component({
   selector: 'app-unico',
@@ -11,7 +12,7 @@ import { LuchadorInter, Pelea } from './luchador-inter';
   styleUrl: './unico.component.css'
 })
 export class UnicoComponent {
-  constructor(private apiService: LuchadorService , private sanitizer: DomSanitizer , private router: Router , private route: ActivatedRoute ){}
+  constructor(private apiService: LuchadorService , private apiCombates: CombatesService, private sanitizer: DomSanitizer , private router: Router , private route: ActivatedRoute ){}
   data: any[] = [];
   datos: any[] = [];
   dataArray: any[] = [];
@@ -23,6 +24,7 @@ export class UnicoComponent {
   idpelea: number = 0;
   lastFight1: Pelea = {} as Pelea;
   lastFight2: Pelea = {} as Pelea;
+  listacombates: listacombates[] = [];
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
@@ -31,14 +33,17 @@ export class UnicoComponent {
         this.idluchador = id;
         return forkJoin([
           this.apiService.getLuchador(id),
-          this.apiService.getidPelea(id)
+          this.apiService.getidPelea(id),
+          this.apiCombates.getCombatesPeleador(id)
         ]);
       })
-    ).subscribe(([luchador, pelea]) => {
+    ).subscribe(([luchador, pelea , combates]) => {
       this.luchador = luchador;
       this.getPesoNombre(this.luchador.pesoId);
       console.log(this.luchador);
-
+      this.listacombates = combates;
+      console.log('Ultimos combates')
+      console.log(this.listacombates)
       this.pelea = pelea[0].pelea;
       this.idpelea = Number(this.pelea)
       console.log('Esto hay en pelea : ' + this.idpelea);
