@@ -4,7 +4,7 @@
 ## Con back-end en Docker
 ### Clonar Repositorio , acceder desde terminal a carpeta **backDocker** 
 ```
-cd ./backDocker/
+cd ./backend/
 ```
 ### Construir compose
 ```
@@ -19,7 +19,7 @@ docker ps -a
 docker start (nombre_contenedor)
 ```
 ### Acceder al enlace del front desplegado :
-https://front-ufc-api.vercel.app/
+https://api-front-ufc.vercel.app/
 ## Guia para Dockerizar backend
 [Dockerizar API Nodejs y Datos Postgress](docker.md)
   

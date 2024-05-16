@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Define el comando para ejecutar la aplicación
-CMD ["npm", "run"]
+CMD ["npm", "start"]
