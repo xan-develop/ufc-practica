@@ -4,9 +4,21 @@
   margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* Crea 6 columnas de igual ancho */
-  height: 10%;
+  height: 40%;
   width: 80%;
   gap: 10px;
+
+}
+@media (max-width: 1200px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr); /* 2 columnas con el mismo ancho */
+  }
+
+}
+@media (max-width: 800px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas con el mismo ancho */
+  }
 
 }
 #img-luchador{
@@ -19,7 +31,7 @@
 transition: 0.5s;
   grid-template-columns: repeat(1, 1fr); /* Crea 6 columnas de igual ancho */
   overflow: hidden;
-  height: 210px;
+  height: 250px;
   box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.1); /* Cambia los valores según tus preferencias */
 }
 .grid-item:hover {
