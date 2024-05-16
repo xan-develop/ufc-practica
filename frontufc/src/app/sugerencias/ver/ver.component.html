@@ -4,7 +4,12 @@
 <p>ID : {{sug.id}}</p>
 <p>Usuario : {{sug.usuario}}</p>
 <p>Correo : {{sug.correo}}</p>
-<p>{{sug.luchador1}} VS {{sug.luchador2}}</p>
+<p>Evento : {{sug.evento}}</p>
+<p>Luchadores</p>
+<ul>
+  <li *ngFor="let luchadores of sug.peleas">{{luchadores}}</li>
+</ul>
+
 <p>Descripcion : </p>
 <p>{{sug.descripcion}}</p>
   </div>

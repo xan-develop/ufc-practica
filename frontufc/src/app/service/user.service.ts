@@ -9,13 +9,19 @@ import { User } from '../models/users';
 export class UserService {
   private urlUser='http://localhost:3000/api/users';
   private urlLogin='http://localhost:3000/api/login';
-
+  isadmin: boolean = false;
   constructor(private http: HttpClient ) { }
 
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
+  }
+  setAdmin(){
+    this.isadmin = true;
+  }
+  isAdmin(){
+    return this.isadmin;
   }
   isLoggedIn(): boolean{
     const token = localStorage.getItem('token');
@@ -47,8 +53,9 @@ export class UserService {
     return this.http.get<any>(this.urlUser+`/${id}`);
   }
 
- createUser(socio: any): Observable<User> {
-    return this.http.post<User>(this.urlUser, socio, this.httpOptions)
+ createUser(user: any): Observable<User> {
+  console.log('Creando usuario ...')
+    return this.http.post<User>(this.urlUser, user, this.httpOptions)
     .pipe( catchError((error: any) => {
 
       console.error('Error occurred:', error);

@@ -14,10 +14,10 @@ export const Sugerencia = sequelize.define('sugerencias' , {
     correo: {
         type: DataTypes.STRING,
     },
-    luchador1: {
-        type: DataTypes.STRING,
+    peleas: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
     },
-    luchador2: {
+    evento:{
         type: DataTypes.STRING,
     },
     descripcion: {

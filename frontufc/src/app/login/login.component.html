@@ -16,7 +16,12 @@
     <div *ngIf="confirmacion" class="confirmation-message">
       ¡Inicio de sesión exitoso!
     </div>
-
+    <div *ngIf="isadmin" class="confirmation-message">
+      Has entrado como Administrador
+    </div>
   </form>
+  <div class="form-group">
+    <button (click)="register()">Crear una cuenta</button>
+  </div>
 </div>
 </section>

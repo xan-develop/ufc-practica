@@ -11,19 +11,35 @@ import { LuchadorService } from '../service/luchador.service';
   encapsulation: ViewEncapsulation.None // Desactiva la encapsulación de estilos
 })
 export class SugerenciasComponent {
-  nuevaSugerencia: Sugerencia = { usuario: '', correo: '' , luchador1: '' , luchador2: '' , descripcion: '' }; // Inicialización con valores predeterminados
+  nuevaSugerencia: Sugerencia = { usuario: '', correo: '' , peleas: [] , evento: 0 , descripcion: '' }; // Inicialización con valores predeterminados
   data: any = { luchadores: [] }; // Tipo definido como LuchadoresData
   url: string = '/luchador/';
   luchadoresFiltrados: any[] = []; // Array para almacenar los luchadores filtrados
   searchTerm: string = '';
   peso: string = '0' ; // Define peso como un número opcional
+mostrarerror: boolean = false;
+
   constructor(private apiService: SugerenciasService , private luchService: LuchadorService , private sanitizer: DomSanitizer ){}
+
   ngOnInit(): void {
     this.llenarData(this.toNum(this.peso));
     console.log(this.peso)
   }
+  LuchadorChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const valor = selectElement.value;
 
+    if (!this.nuevaSugerencia.peleas.includes(valor)) {
+      this.nuevaSugerencia.peleas.push(valor);
+    }
+    console.log(this.nuevaSugerencia.peleas)
+  }
   crearSugerencia() {
+    if (this.nuevaSugerencia.evento.toString().length < 3) {
+
+      this.mostrarerror = true;
+      return;
+    }
     console.log('Has llamado a crear sugerencia en el formulario')
     this.apiService.createSug(this.nuevaSugerencia)
       .subscribe(

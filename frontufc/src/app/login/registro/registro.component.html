@@ -1,0 +1,44 @@
+<section id="singsection">
+  <div class="sing-container">
+    <h2>Sing up</h2>
+    <form id="sing-form" (ngSubmit)="sing()" #singForm="ngForm" class="slideDown">
+      <div *ngIf="errorCreate" class="error-message">
+        El usuario o correo ya existe
+      </div>
+      <div class="form-group">
+        <label for="username">Usuario</label>
+        <input type="text" id="username" name="username" [(ngModel)]="newUser.usuario" required #username="ngModel">
+        <div *ngIf="username.errors?.['required'] && username.dirty" class="error-message">Campo Requerido*</div>
+      </div>
+
+      <div class="form-group">
+        <label for="correo">Correo</label>
+        <input type="email" id="correo" name="email" [(ngModel)]="newUser.correo" required #correo="ngModel" email>
+        <div *ngIf="correo.errors?.['required'] && correo.dirty" class="error-message">Campo Requerido*</div>
+        <div *ngIf="correo.errors?.['email'] && correo.dirty" class="error-message">Correo electrónico inválido</div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" [(ngModel)]="password" required>
+      </div>
+      <div class="form-group">
+        <label for="passwordConfirm">Repite la contraseña</label>
+        <input type="password" id="passwordConfirm" name="passwordConfirm" [(ngModel)]="passwordConfirm" required>
+      </div>
+      <div *ngIf="password !== passwordConfirm" class="error-message">
+        La contraseña no es la misma
+      </div>
+      <div class="form-group">
+        <button type="submit" [disabled]="!singForm.form.valid">Registrarse</button>
+      </div>
+      <div *ngIf="!singForm.form.valid && singForm.submitted" class="error-message">
+        Por favor, completa correctamente el formulario.
+      </div>
+      <div *ngIf="confirmacion" class="confirmation-message">
+        ¡Cuenta creada correctamente!
+      </div>
+    </form>
+  </div>
+</section>
+

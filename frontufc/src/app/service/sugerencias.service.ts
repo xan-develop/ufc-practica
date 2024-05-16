@@ -32,6 +32,7 @@ export class SugerenciasService {
   }
 
  createSug(sug: any): Observable<Sugerencia> {
+  console.log('La sugerencia es : ' + sug);
     return this.http.post<Sugerencia>(this.urlSuggest, sug, this.httpOptions)
     .pipe( catchError((error: any) => {
 

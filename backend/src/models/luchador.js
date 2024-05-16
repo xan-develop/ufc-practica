@@ -33,6 +33,21 @@ export const Luchador = sequelize.define('luchadores' , {
     },
     rango: {
         type: DataTypes.INTEGER
+    },
+    altura:  {
+        type: DataTypes.DOUBLE
+    },
+    finalizaciones: {
+        type: DataTypes.INTEGER
+    },
+    kos: {
+        type: DataTypes.INTEGER
+    },
+    decisiones:{
+        type: DataTypes.INTEGER
+    },
+    alias:{
+        type: DataTypes.STRING
     }
 })
 export default Luchador;

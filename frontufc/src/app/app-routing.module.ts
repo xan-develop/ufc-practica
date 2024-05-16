@@ -9,6 +9,7 @@ import { LuchadorComponent } from './luchador/luchador.component';
 import { UnicoComponent } from './luchador/unico/unico.component';
 import { LoginComponent } from './login/login.component';
 import { VerComponent } from './sugerencias/ver/ver.component';
+import { RegistroComponent } from './login/registro/registro.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'sugerencias' , component: SugerenciasComponent},
   {path: 'todos' , component: LuchadorComponent},
   {path: 'login' , component: LoginComponent},
+  {path: 'registro' , component: RegistroComponent},
   {path: 'versugerencias' , component: VerComponent},
   {path: 'luchador/:id' , component: UnicoComponent},
 ];

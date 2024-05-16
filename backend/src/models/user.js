@@ -22,6 +22,9 @@ export const Users = sequelize.define('users', {
             isEmail: true
         }
     },
+    role: {
+        type: DataTypes.STRING,
+    },
     clave: {
         type: DataTypes.STRING,
         allowNull: false,

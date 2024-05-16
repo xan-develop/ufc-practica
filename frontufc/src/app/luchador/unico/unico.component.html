@@ -1,19 +1,36 @@
 <section id="luchador">
   <div id="container">
 <div id="info">
-  <p>{{luchador?.nombre}}</p>
   <p>{{pesoNombre}}</p>
+  <p>{{luchador?.nombre}}</p>
+  <p id="alias">"{{luchador?.alias}}"</p>
   <p>Record : {{luchador?.victorias}} - {{luchador?.derrotas}}</p>
+  <p>{{luchador?.altura}} cm</p>
+
   <span id="pais"><img src="https://flagsapi.com/{{ luchador?.nacionalidad | uppercase }}/flat/64.png">
   </span>
+  <div class="stats">
+    <div class="numeros">
+      <p class="title-stat">KO`S</p>
+      <p class="num-stat">{{luchador?.kos}}</p>
+    </div>
+    <div class="numeros">
+      <p class="title-stat">Sumisiones</p>
+      <p class="num-stat">{{luchador?.finalizaciones}}</p>
+    </div>
+    <div class="numeros">
+      <p class="title-stat">Decisiones</p>
+      <p class="num-stat">{{luchador?.decisiones}}</p>
+    </div>
+  </div>
 </div>
 <div id="foto"><img id="imagen-luchador" [src]="urlImg + luchador?.imagen" alt=""></div>
 <div id="historial">
   <span id="title">ÚLTIMO COMBATE</span>
   <div id="combate">
     <div id="img-combate">
-      <div id="img1"><img [src]="urlImg + lastFight1.imagen" alt=""></div>
-      <div id="img2"><img [src]="urlImg + lastFight2.imagen" alt="" [class.transparent-img]="lastFight2.luchadorid !== lastFight2.ganador"></div>
+      <div id="img1"><a href="/luchador/{{lastFight1.luchadorid}}"><img [src]="urlImg + lastFight1.imagen" alt="" [class.transparent-img]="lastFight1.luchadorid !== lastFight1.ganador"></a></div>
+      <div id="img2"><a href="/luchador/{{lastFight2.luchadorid}}"><img [src]="urlImg + lastFight2.imagen" alt="" [class.transparent-img]="lastFight2.luchadorid !== lastFight2.ganador"></a></div>
     </div>
 <div id="info-combate">
   <span id="versus" style="color: antiquewhite;"><p>{{lastFight1.nombre}} VS {{lastFight2.nombre}}</p><a id="link" style="text-decoration: none;" href="/combates/{{lastFight1.evento}}"><p>UFC {{lastFight1.evento}}</p></a></span>
@@ -21,4 +38,21 @@
   </div>
 </div>
   </div>
+</section>
+<h1 style="text-align: center;">Historial de Combates</h1>
+<section id="ultimoscombates">
+<div *ngFor="let pelea of listacombates" class="listacombates">
+  <div id="fotolista1">
+    <a href="/luchador/{{pelea.idluchador1}}"><img id="fotohistorial" [src]="urlImg + pelea.img1" alt="{{pelea.luchador1}}" [class.transparent-img]="pelea.idluchador1 !== pelea.ganador"></a>
+  </div>
+  <div id="listamedio">
+    <img src="../../../assets/imagenes/VS.png" alt="">
+    <p><a href="/combates/{{pelea.evento}}" style="text-decoration: none;">UFC {{pelea.evento}}</a></p>
+  </div>
+  <div id="fotolista2">
+    <a href="/luchador/{{pelea.idluchador2}}"><img id="fotohistorial" [src]="urlImg + pelea.img2" alt="{{pelea.luchador2}}" [class.transparent-img]="pelea.idluchador2 !== pelea.ganador"></a>
+  </div>
+</div>
+
+
 </section>

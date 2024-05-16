@@ -35,17 +35,18 @@ export const getSuggetsId = async (req, res) => {
 // Crear un nuevo peso
 export const createSuggets = async (req, res) => {
     try {
-        console.log('Estas llamando a crear sugerencia')
-        const {usuario, correo, luchador1 , luchador2, descripcion} = req.body
+        console.log('Estás llamando a crear sugerencia');
+        const { usuario, correo, peleas, evento, descripcion } = req.body;
         const newSuggest = await Sugerencia.create({
             usuario,
             correo,
-            luchador1,
-            luchador2,
+            peleas, 
+            evento,
             descripcion,
-        })
-        res.json(newSuggest)
+        });
+        res.json(newSuggest);
     } catch (error) {
+        
         return res.status(500).json({
             message: error.message
         });

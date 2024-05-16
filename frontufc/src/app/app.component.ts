@@ -13,6 +13,9 @@ export class AppComponent {
   isLogged(): boolean {
     return this.logService.isLoggedIn();
   }
+  isAdmin(){
+    return this.logService.isAdmin();
+  }
 logOut(){
   this.logService.logout();
   this.router.navigate(['/']);

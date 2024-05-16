@@ -25,7 +25,7 @@ export const login = async (req, res) => {
       // Genera token de autenticación
       const token = jwt.sign({ userId: user.id }, 'secreto', { expiresIn: '1h' });
       // Responder con el token 
-      res.status(200).json({ token, user: { usuario: user.usuario, correo: user.correo } });
+      res.status(200).json({ token, user: { usuario: user.usuario, role: user.role } });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Error de servidor' });
