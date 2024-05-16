@@ -1,6 +1,6 @@
 import {Users} from "../models/user.js";
 
-// Obtener todos los pesos
+// Obtener todos los usuarios
 export const getUsers = async (req, res) => {
     console.log('Estás llamando a users');
     try {
@@ -36,11 +36,12 @@ export const getUsersId = async (req, res) => {
 export const createUser = async (req, res) => {
     try {
         console.log('Estas llamando a crear usuario')
-        const {usuario, correo, clave} = req.body
+        const {usuario, correo, clave , role} = req.body
         const newuser = await Users.create({
             usuario,
             correo,
             clave,
+            role
         })
         res.json(newuser)
     } catch (error) {
@@ -55,7 +56,7 @@ export const updateUser = async (req, res) => {
     try {
         console.log('Estás llamando a Userupdate');
         const { id } = req.params;
-        const {usuario, correo, clave} = req.body
+        const {usuario, correo, clave , role} = req.body
         const user = await Users.findByPk(id);
         if (!user) {
             return res.status(404).json({ message: 'Luchador no encontrado' });
@@ -64,6 +65,7 @@ export const updateUser = async (req, res) => {
             usuario: usuario,
             correo: correo,
             clave: clave,
+            role: role
         });
         return res.json(user);
     } catch (error) {
