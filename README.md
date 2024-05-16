@@ -23,7 +23,7 @@ https://api-front-ufc.vercel.app/
 ## Guia para Dockerizar backend
 [Dockerizar API Nodejs y Datos Postgress](docker.md)
   
-  Login - Usuario: manolo8 - contraseña : onmula
+  Login -Admin:    Usuario: admin - contraseña : 1234
 **-----------------------------------------------------**  
   
     
