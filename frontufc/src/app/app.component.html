@@ -48,16 +48,15 @@
             </div>
           </span>
           <span class="menu-enlaces" id="icon-class"><a id="icon-enlace" href="/"><img src="../assets/imagenes/logorojo.png" alt=""></a></span>
-          <span class="menu-enlaces" *ngIf="!isLogged(); else ver"><a href="/sugerencias">Sugerencias</a></span>
+          <span class="menu-enlaces" *ngIf="!isLogged(); else ver"><a href="/login">Sugerencias</a></span>
           <ng-template #ver>
-            <span class="menu-enlaces"><a href="/versugerencias">Sugerencias</a></span>
+            <span class="menu-enlaces" *ngIf="isAdmin();"><a href="/versugerencias">Sugerencias</a></span>
+            <span class="menu-enlaces" *ngIf="!isAdmin();"><a href="/sugerencias">Sugerencias</a></span>
           </ng-template>
           <span class="menu-enlaces" *ngIf="!isLogged(); else loggedIn">
             <a href="/login">Login</a>
           </span>
-
-
-          <ng-template #loggedIn>
+           <ng-template #loggedIn>
             <span class="menu-enlaces">
               <a style="cursor: pointer;" (click)="logOut()">Cerrar sesión</a>
             </span>
