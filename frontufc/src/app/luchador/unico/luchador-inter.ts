@@ -37,3 +37,4 @@ export interface listacombates{
   img2: string;
   ganador: number;
 }
+

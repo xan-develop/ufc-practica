@@ -4,7 +4,7 @@ body{
 section {
   display: grid;
   width: 90%;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   justify-content: center; /* Centra el contenido horizontalmente */
   align-items: center; /* Centra el contenido verticalmente */
@@ -14,7 +14,8 @@ section {
 
 #sugerencia {
 
-  height: 400px;
+  height: 100%;
+
   align-items: center;
   justify-content: center;
   background-color: rgb(231, 231, 231);

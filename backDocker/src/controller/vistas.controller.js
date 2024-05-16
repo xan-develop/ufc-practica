@@ -1,5 +1,23 @@
 import { sequelize } from "../database/database.js";
 
+export const getCombatesLuchador = async (req, res) => {
+    
+    try {
+        const { id } = req.params;
+        // Realizar consulta SQL a la vista 
+        console.log('Estas llamando a vista luchadoresPeso')
+        const combatesLuchador = await sequelize.query(
+            `SELECT * FROM combatesluchador WHERE idluchador1 = ${id} OR idluchador2 =  ${id} ORDER BY evento desc `,
+            { type: sequelize.QueryTypes.SELECT }
+        );
+
+        
+        res.json(combatesLuchador);
+    } catch (error) {
+      
+        res.status(500).json({ message: error.message });
+    }
+};
 export const getLuchadoresPeso = async (req, res) => {
     const pesoId = "pesoId";
     try {
