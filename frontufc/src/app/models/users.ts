@@ -1,10 +1,15 @@
 export interface User {
+  id?:number;
   usuario: string;
   correo: string;
   clave: string;
-  role: string;
 }
 export interface UserRole{
+  userId?: number;
+  roleId: number;
+}
+
+export interface UserRoleArray{
   usuario: string;
-  role: string;
+  roleId: number [];
 }

@@ -10,6 +10,7 @@ import { UnicoComponent } from './luchador/unico/unico.component';
 import { LoginComponent } from './login/login.component';
 import { VerComponent } from './sugerencias/ver/ver.component';
 import { RegistroComponent } from './login/registro/registro.component';
+import { authGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -17,7 +18,7 @@ const routes: Routes = [
   {path: 'eventos' , component: EventosComponent},
   {path: 'luchadores' , component: LuchadoresComponent},
   {path: 'combates/:id' , component: CombatesComponent},
-  {path: 'sugerencias' , component: SugerenciasComponent},
+  {path: 'sugerencias' , component: SugerenciasComponent , canActivate: [authGuard]},
   {path: 'todos' , component: LuchadorComponent},
   {path: 'login' , component: LoginComponent},
   {path: 'registro' , component: RegistroComponent},

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../service/user.service';
-import { User } from '../../models/users';
+import { User, UserRole } from '../../models/users';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,10 +14,12 @@ export class RegistroComponent {
   passwordConfirm: string = '';
   role: string = 'normal';
   confirmacion: boolean = false;
-  newUser: User = { usuario: '' , correo: '' , clave: '' , role: 'normal'}
+  newUser: User = { usuario: '' , correo: '' , clave: '' }
+  newUserRole: UserRole = { userId: 0 , roleId: 3}
   errorPass: boolean = false;
   errorCreate: boolean = false;
   errorEmpty: boolean = false;
+
 constructor( private service: UserService , private route: Router){}
 
 sing() {
@@ -29,6 +31,14 @@ sing() {
       this.service.createUser(this.newUser).subscribe(
         (response) => {
           console.log(response);
+          console.log(response.id);
+          this.newUserRole.userId = response.id;
+          this.service.setRole(this.newUserRole).subscribe(
+            (roleResponse) => {
+              console.log('Rol asignado:', roleResponse);
+              alert('Rol Asignado : ' + this.newUserRole.roleId);
+              this.confirmacion = true;
+            }),
           alert('Todo correcto');
           this.confirmacion = true;
         },
