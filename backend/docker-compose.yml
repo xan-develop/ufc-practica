@@ -24,7 +24,7 @@ services:
       POSTGRES_PASSWORD: onmula
       POSTGRES_DB: ufc
     volumes:
-      - ./ufcfin.sql:/docker-entrypoint-initdb.d/ufcfin.sql
+      - ./ufcfinal.sql:/docker-entrypoint-initdb.d/ufcfinal.sql
 
 volumes:
   ufcvolume:
