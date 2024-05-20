@@ -48,11 +48,13 @@
             </div>
           </span>
           <span class="menu-enlaces" id="icon-class"><a id="icon-enlace" href="/"><img src="../assets/imagenes/logorojo.png" alt=""></a></span>
-          <span class="menu-enlaces"><a href="/sugerencias">Sugerencias</a></span>
-          <ng-template #ver>
-            <span class="menu-enlaces" *ngIf="isAdmin();"><a href="/versugerencias">Sugerencias</a></span>
-            <span class="menu-enlaces" *ngIf="!isAdmin();"><a href="/sugerencias">Sugerencias</a></span>
-          </ng-template>
+          <span class="menu-enlaces"><a href="/sugerencias">Sugerencias</a>
+            <div class="dropdown">
+              <ul>
+                <li><a href="/versugerencias">Ver</a></li>
+              </ul>
+            </div>
+          </span>
           <span class="menu-enlaces" *ngIf="!isLogged(); else loggedIn">
             <a href="/login">Login</a>
           </span>

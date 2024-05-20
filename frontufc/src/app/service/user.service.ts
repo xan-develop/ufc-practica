@@ -18,11 +18,14 @@ export class UserService {
       'Content-Type': 'application/json'
     })
   }
+
   setAdmin(){
     this.isadmin = true;
+    localStorage.setItem('isadmin', 'true');
+    console.log('Se ha puestro true la variable admin  ' + this.isadmin)
   }
   isAdmin(){
-    return this.isadmin;
+    return this.isadmin || localStorage.getItem('isadmin') === 'true';
   }
   isLoggedIn(): boolean{
     const token = localStorage.getItem('token');
@@ -31,6 +34,7 @@ export class UserService {
   logout() {
 
     localStorage.removeItem('token');
+    localStorage.removeItem('isadmin');
   }
   login(usuario: string, clave: string): Observable<any> {
     const body = { usuario, clave };

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { User, UserRole } from '../../models/users';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
@@ -36,10 +37,15 @@ sing() {
           this.service.setRole(this.newUserRole).subscribe(
             (roleResponse) => {
               console.log('Rol asignado:', roleResponse);
-              alert('Rol Asignado : ' + this.newUserRole.roleId);
               this.confirmacion = true;
             }),
-          alert('Todo correcto');
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Te has registrado con exito " + this.newUser.usuario,
+              showConfirmButton: false,
+              timer: 1500
+            });
           this.confirmacion = true;
         },
         (error) => {

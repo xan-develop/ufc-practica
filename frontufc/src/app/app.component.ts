@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from './service/user.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,10 @@ export class AppComponent {
 logOut(){
   this.logService.logout();
   this.router.navigate(['/']);
-  alert('Sesión cerrada correctamente');
+  Swal.fire({
+    icon: "info",
+    title: "Logout",
+    text: "Has cerrado sesion!",
+  });
 }
 }

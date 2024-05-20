@@ -27,7 +27,7 @@
 <select name="luchador1" (change)="LuchadorChange($event)" id="luch1">
   <option *ngFor="let luchador of luchadoresFiltrados" [value]="luchador.nombre" >{{luchador.nombre}}</option>
 </select>
-<p>Luchadores seleccionados : </p>
+<p>Luchador 1 seleccionado : </p>
 <p id="lista" *ngFor="let luchador of nuevaSugerencia.peleas">{{luchador}}</p>
 <label for="desc">Poque te gustaria</label>
 <input type="text" id="largo" name="descripcion" [(ngModel)]="nuevaSugerencia.descripcion">

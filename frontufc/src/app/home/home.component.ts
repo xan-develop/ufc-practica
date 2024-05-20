@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CombatesService } from '../service/combates.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.llenarData();
+
   }
 
   llenarData(){
