@@ -10,6 +10,7 @@ import { SugerenciasService } from '../../service/sugerencias.service';
 export class VerComponent implements OnInit{
   data: any[] = [];
 
+
 constructor(private service: SugerenciasService){}
   ngOnInit(): void {
    this.llenarData();

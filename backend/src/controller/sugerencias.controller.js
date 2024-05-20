@@ -36,11 +36,12 @@ export const getSuggetsId = async (req, res) => {
 export const createSuggets = async (req, res) => {
     try {
         console.log('Estás llamando a crear sugerencia');
-        const { usuario, correo, peleas, evento, descripcion } = req.body;
+        const { usuario, correo, peleas, peleas2, evento, descripcion } = req.body;
         const newSuggest = await Sugerencia.create({
             usuario,
             correo,
             peleas, 
+            peleas2,
             evento,
             descripcion,
         });

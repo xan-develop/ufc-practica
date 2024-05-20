@@ -17,6 +17,9 @@ export const Sugerencia = sequelize.define('sugerencias' , {
     peleas: {
         type: DataTypes.ARRAY(DataTypes.STRING),
     },
+    peleas2: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+    },
     evento:{
         type: DataTypes.STRING,
     },

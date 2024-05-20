@@ -3,6 +3,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Sugerencia } from '../models/sugerencias';
 import { SugerenciasService } from '../service/sugerencias.service';
 import { LuchadorService } from '../service/luchador.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sugerencias',
@@ -11,7 +12,7 @@ import { LuchadorService } from '../service/luchador.service';
   encapsulation: ViewEncapsulation.None // Desactiva la encapsulación de estilos
 })
 export class SugerenciasComponent {
-  nuevaSugerencia: Sugerencia = { usuario: '', correo: '' , peleas: [] , evento: 0 , descripcion: '' }; // Inicialización con valores predeterminados
+  nuevaSugerencia: Sugerencia = { usuario: '', correo: '' , peleas: [] , peleas2: [] , evento: 0 , descripcion: '' }; // Inicialización con valores predeterminados
   data: any = { luchadores: [] }; // Tipo definido como LuchadoresData
   url: string = '/luchador/';
   luchadoresFiltrados: any[] = []; // Array para almacenar los luchadores filtrados
@@ -34,6 +35,15 @@ mostrarerror: boolean = false;
     }
     console.log(this.nuevaSugerencia.peleas)
   }
+  LuchadorChange2(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const valor = selectElement.value;
+
+    if (!this.nuevaSugerencia.peleas2.includes(valor)) {
+      this.nuevaSugerencia.peleas2.push(valor);
+    }
+    console.log(this.nuevaSugerencia.peleas2)
+  }
   crearSugerencia() {
     if (this.nuevaSugerencia.evento.toString().length < 3) {
 
@@ -45,10 +55,11 @@ mostrarerror: boolean = false;
       .subscribe(
         response => {
           console.log('Sugerencia creado exitosamente:', response);
-          window.alert('¡La sugerencia se ha creado exitosamente!');
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
+          Swal.fire({
+            icon: "success",
+            title: "Sugerencia creada",
+          });
+
         },
         error => {
           console.error('Error al crear socio:', error);

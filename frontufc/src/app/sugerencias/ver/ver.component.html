@@ -7,9 +7,15 @@
 <p>Evento : {{sug.evento}}</p>
 <p>Luchadores</p>
 <ul>
-  <li *ngFor="let luchadores of sug.peleas">{{luchadores}}</li>
+  <li *ngFor="let luchador of sug.peleas; let i = index">
+    <ng-container *ngIf="sug.peleas2 && sug.peleas2.length > i; else noSecondFighters">
+      {{ luchador }} vs {{ sug.peleas2[i] }}
+    </ng-container>
+    <ng-template #noSecondFighters>
+      {{ luchador }}
+    </ng-template>
+  </li>
 </ul>
-
 <p>Descripcion : </p>
 <p>{{sug.descripcion}}</p>
   </div>

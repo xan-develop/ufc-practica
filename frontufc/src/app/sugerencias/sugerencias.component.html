@@ -23,12 +23,18 @@
   <option value="7">Peso Pesado</option>
 </select>
 
-<label for="luch1">Luchadores :</label>
+<label for="luch1">Luchador 1 :</label>
 <select name="luchador1" (change)="LuchadorChange($event)" id="luch1">
   <option *ngFor="let luchador of luchadoresFiltrados" [value]="luchador.nombre" >{{luchador.nombre}}</option>
 </select>
-<p>Luchador 1 seleccionado : </p>
-<p id="lista" *ngFor="let luchador of nuevaSugerencia.peleas">{{luchador}}</p>
+<label for="luch1">Luchador 2 :</label>
+<select name="luchador2" (change)="LuchadorChange2($event)" id="luch2">
+  <option *ngFor="let luchador of luchadoresFiltrados" [value]="luchador.nombre" >{{luchador.nombre}}</option>
+</select>
+<p> Peleas seleccionadas : </p>
+<div *ngFor="let luchador1 of nuevaSugerencia.peleas; let i = index">
+  <p>{{ luchador1 }} vs {{ nuevaSugerencia.peleas2[i] }}</p>
+</div>
 <label for="desc">Poque te gustaria</label>
 <input type="text" id="largo" name="descripcion" [(ngModel)]="nuevaSugerencia.descripcion">
 <button type="submit" class="sug-btn" >Sugerir</button>
