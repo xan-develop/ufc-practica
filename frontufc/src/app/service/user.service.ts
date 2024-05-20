@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { User } from '../models/users';
+import { User, UserRole } from '../models/users';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,7 @@ import { User } from '../models/users';
 export class UserService {
   private urlUser='http://localhost:3000/api/users';
   private urlLogin='http://localhost:3000/api/login';
+  private urlRole= 'http://localhost:3000/api/userRole';
   isadmin: boolean = false;
   constructor(private http: HttpClient ) { }
 
@@ -63,7 +64,16 @@ export class UserService {
     })
     )
   }
+  setRole(rol: any): Observable<UserRole> {
+    console.log('Creando usuario ...')
+      return this.http.post<UserRole>(this.urlRole , rol, this.httpOptions)
+      .pipe( catchError((error: any) => {
 
+        console.error('Error occurred:', error);
+        throw error;
+      })
+      )
+    }
   deleteUser(id: number): Observable<any> {
 
     return this.http.delete<any>(this.urlUser+`/${id}`);

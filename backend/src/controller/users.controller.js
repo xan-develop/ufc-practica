@@ -1,5 +1,55 @@
 import {Users} from "../models/user.js";
+import {Role} from "../models/role.js";
+import {UserRole} from "../models/userroles.js"
 
+export const getUserRoles = async (req, res) => {
+    try {
+       
+        const { userid } = req.params; 
+        console.log('Estas llamando a obtener los roles de un usuario : ' + userid);
+        const user = await Users.findOne({
+            where: { id: userid },
+            include: [{
+                model: Role,
+                through: {
+                    attributes: [] 
+                }
+            }]
+        })
+        if (user) {
+            const roles = user.roles.map(role => role.nombre); // Obtener los nombres de los roles
+            const rolesid = user.roles.map(role => role.id); // Obtener los id de los roles
+            res.json({
+                rolesid: rolesid
+            });
+        } else {
+            res.status(404).json({
+                message: 'Usuario no encontrado'
+            });
+        }
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+
+export const addRoleUser = async (req, res) => {
+    try {
+        console.log('Estas llamando a crear UserRole')
+        const {userId , roleId } = req.body
+        const newUserRole = await UserRole.create({
+            userId,
+            roleId 
+        })
+        res.json(newUserRole)
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+}
 // Obtener todos los usuarios
 export const getUsers = async (req, res) => {
     console.log('Estás llamando a users');
@@ -31,17 +81,31 @@ export const getUsersId = async (req, res) => {
         });
     }
 };
-
+export const createRole = async (req, res) => {
+    try {
+        console.log('Estas llamando a crear usuario')
+        const {nombre } = req.body
+        const newrole = await Role.create({
+            nombre
+           
+        })
+        res.json(newrole)
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
 // Crear un nuevo peso
 export const createUser = async (req, res) => {
     try {
         console.log('Estas llamando a crear usuario')
-        const {usuario, correo, clave , role} = req.body
+        const {usuario, correo, clave } = req.body
         const newuser = await Users.create({
             usuario,
             correo,
             clave,
-            role
+           
         })
         res.json(newuser)
     } catch (error) {

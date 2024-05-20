@@ -8,9 +8,9 @@ ENV POSTGRES_DB=ufc
 ENV POSTGRES_PORT=5432
 
 # Copia el SQL file into the Docker container
-COPY ufcfin.sql /docker-entrypoint-initdb.d/
+COPY ufcrole.sql /docker-entrypoint-initdb.d/
 
 # Cambiar los permisos del archivo para asegurar la ejecución
-RUN chown postgres:postgres /docker-entrypoint-initdb.d/ufcfin.sql
-RUN chmod 755 /docker-entrypoint-initdb.d/ufcfin.sql
+RUN chown postgres:postgres /docker-entrypoint-initdb.d/ufcrole.sql
+RUN chmod 755 /docker-entrypoint-initdb.d/ufcrole.sql
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../service/user.service';
-import { UserRole } from '../models/users';
+import { UserRole, UserRoleArray } from '../models/users';
 import { Route, Router } from '@angular/router';
 
 @Component({
@@ -14,7 +14,8 @@ user: string = '';
 password: string = '';
 confirmacion: boolean = false;
 isadmin: boolean = false;
-rol: UserRole = { usuario: '' , role: ''}
+rol: UserRole = { userId: 0 , roleId: 3}
+roles: UserRoleArray = { usuario: '' , roleId: [] }
 register(){
 this.route.navigate(['/registro']);
 }
@@ -22,15 +23,16 @@ log() {
   this.apiService.login(this.user, this.password).subscribe(
     data => {
       console.log(data);
-      this.rol = data.user;
-      console.log('Este es el ROL : ' + this.rol.role)
+      this.roles.roleId = data.rolesid;
+      this.roles.usuario = data.username.usuario;
+      console.log('Esta es la info : ' + this.roles.usuario)
+      console.log('Este es el ROL : ' + this.roles.roleId)
       localStorage.setItem('token', data.token);
       this.confirmacion = true;
-      if (this.rol.role === 'admin'){
+      if (this.roles.roleId.includes(1)){
         this.isadmin = true;
-        this.apiService.setAdmin();
+        console.log('Eres admin')
       }
-      console.log('Es admin? : ' + this.isadmin)
     },
     error => {
       console.error('Error al iniciar sesión:', error);

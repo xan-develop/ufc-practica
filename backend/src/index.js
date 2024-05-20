@@ -7,7 +7,17 @@ import { sequelize } from './database/database.js';
 import Combate from './models/combate.js';
 import Luchador from './models/luchador.js';
 import Peso from './models/peso.js';
+import Users from './models/user.js';
+import Role from './models/role.js';
 
+Users.belongsToMany(Role , {
+   through: 'user_roles',
+   foreignKey: 'userId'
+});
+Role.belongsToMany(Users , {
+   through: 'user_roles',
+   foreignKey: 'roleId'
+});
 
 Luchador.belongsToMany(Combate, {
    through: 'ParticipacionEnCombates',
