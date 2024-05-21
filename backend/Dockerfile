@@ -1,11 +1,11 @@
 # Usa una imagen base de Node.js
-FROM node:latest
+FROM node:18.20.1
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /usr/src/app
 
 # Copia el package.json y el package-lock.json al directorio de trabajo
-COPY package.json ./
+COPY package*.json ./
 
 # Instala las dependencias del proyecto
 RUN npm install
