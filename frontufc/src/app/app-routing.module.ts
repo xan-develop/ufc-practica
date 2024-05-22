@@ -12,6 +12,7 @@ import { VerComponent } from './sugerencias/ver/ver.component';
 import { RegistroComponent } from './login/registro/registro.component';
 import {authGuard } from './auth.guard';
 import { adminGuard } from './admin.guard';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'registro' , component: RegistroComponent},
   {path: 'versugerencias' , component: VerComponent , canActivate: [adminGuard] },
   {path: 'luchador/:id' , component: UnicoComponent},
+  {path: 'nav' , component: NavMenuComponent},
 ];
 
 @NgModule({

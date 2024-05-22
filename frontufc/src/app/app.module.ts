@@ -15,6 +15,7 @@ import { UnicoComponent } from './luchador/unico/unico.component';
 import { LoginComponent } from './login/login.component';
 import { VerComponent } from './sugerencias/ver/ver.component';
 import { RegistroComponent } from './login/registro/registro.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { RegistroComponent } from './login/registro/registro.component';
     UnicoComponent,
     LoginComponent,
     VerComponent,
-    RegistroComponent
+    RegistroComponent,
+    NavMenuComponent
   ],
   imports: [
     BrowserModule,

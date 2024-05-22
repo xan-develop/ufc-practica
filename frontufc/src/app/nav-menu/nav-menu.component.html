@@ -1,0 +1,38 @@
+<section>
+    <div class="bg-black flex items-center justify-center gap-2 w-4/5 h-12 rounded-[100px] mx-auto ">
+        <div class="bg-gris-menu hover:bg-slate-600 h-4/5 w-32 rounded-[90px] flex items-center justify-center cursor-pointer hidden xg:flex">
+            <a class="w-full text-center" href="/eventos">Eventos</a>
+        </div>
+        <div class="bg-gris-menu hover:bg-slate-600 h-4/5 w-32 rounded-[90px] flex items-center justify-center hidden xg:flex">
+            <a class="w-full text-center" href="#link2">Luchadorres</a>
+        </div>
+        <div class="h-4/5 w-32 rounded-[90px] flex items-center justify-center">
+            <a class="w-full text-center" href="#link3"><img class="w-16 ml-5" src="../assets/imagenes/logorojo.png" alt=""></a>
+        </div>
+        <div class="bg-gris-menu h-4/5 hover:bg-slate-600 w-32 rounded-[90px] flex items-center justify-center hidden xg:flex">
+            <a class="w-full text-center" href="#link4">Sugerencias</a>
+        </div>
+        <div class="bg-gris-menu h-4/5 hover:bg-slate-600 w-32 rounded-[90px] flex items-center justify-center hidden xg:flex">
+            <a class="w-full text-center" href="#link5">Login</a>
+        </div>
+            
+        <label for="menu-toggle" class="cursor-pointer xg:hidden block">
+        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+            <title>menu</title>
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+        </svg>
+        </label>
+        <input class="hidden" type="checkbox" id="menu-toggle" />
+        <div id="dropdown-menu" class=" hidden bg-black w-3/5 h-48 rounded-b-[50px] 
+        place-content-center absolute top-[250px] xg:hidden">
+            <ul class=" space-y-2 text-white">
+                <li class="hover:bg-slate-700 h-full"><a href="/eventos" class="block ml-5 text-white">Eventos</a></li>
+                <li class="hover:bg-slate-700"><a href="#link2" class="block ml-5 text-white">Luchadores</a></li>
+                <li class="hover:bg-slate-700"><a href="#link3" class="block ml-5 text-white">Sugerencias</a></li>
+                <li class="hover:bg-slate-700"><a href="#link4" class="block ml-5 text-white">Login</a></li>
+            </ul>
+        </div>
+        </div> 
+   
+
+</section>
