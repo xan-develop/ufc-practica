@@ -34,3 +34,15 @@ section {
   font-weight: 500;
 
 }
+@media (max-width: 1000px) {
+ section{
+  grid-template-columns: repeat(2, 1fr);
+ }
+
+}
+@media (max-width: 700px) {
+  section{
+   grid-template-columns: repeat(1, 1fr);
+  }
+ 
+ }

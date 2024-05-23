@@ -1,53 +1,72 @@
 <section>
-    <div class="bg-black flex items-center justify-center gap-2 w-4/5 h-12 rounded-[100px] mx-auto ">
+    <div id="nav-fondo" class="bg-black flex items-center justify-center gap-2 w-3/4 h-12 rounded-[100px] mx-auto ">
         <div
-            class="bg-gris-menu hover:bg-slate-600 h-4/5 w-32 rounded-[90px] flex items-center justify-center cursor-pointer hidden xg:flex">
+            class="bg-gris-menu hover:bg-slate-600 h-4/5 w-32 rounded-[90px]  items-center justify-center cursor-pointer hidden xg:flex ml-8">
             <a class="w-full text-center" href="/eventos">Eventos</a>
         </div>
-        <div
-            class="bg-gris-menu hover:bg-slate-600 h-4/5 w-32 rounded-[90px] flex items-center justify-center hidden xg:flex">
-            <a class="w-full text-center" href="#link2">Luchadorres</a>
+        <div class="bg-gris-menu hover:bg-slate-600 h-4/5 w-32 rounded-[90px] hidden relative items-center justify-center cursor-pointer xg:flex ml-8"
+            (mouseenter)="showDropdown = true" (mouseleave)="showDropdown = false">
+            <a class="block text-center py-2" href="/luchadores">Luchadores</a>
+            <div class="dropdown w-full absolute top-10 bg-black shadow-lg rounded ml-1" *ngIf="showDropdown">
+                <ul>
+                    <li class="w-full"><a class="block w-full px-4 py-2 text-white hover:bg-slate-800"
+                            href="/luchadores">Ranking</a></li>
+                    <li class="w-full"><a class="block w-full px-4 py-2 text-white hover:bg-slate-800"
+                            href="/todos">Todos</a></li>
+                </ul>
+            </div>
         </div>
         <div class="h-4/5 w-32 rounded-[90px] flex items-center justify-center">
-            <a class="w-full text-center" href="#link3"><img class="w-16 ml-5" src="../assets/imagenes/logorojo.png"
+            <a class="w-full text-center" href="#link3"><img class="w-16 ml-11" src="../assets/imagenes/logorojo.png"
                     alt=""></a>
         </div>
-        <div
-            class="bg-gris-menu h-4/5 hover:bg-slate-600 w-32 rounded-[90px] flex items-center justify-center hidden xg:flex">
-            <a class="w-full text-center" href="#link4">Sugerencias</a>
+        <div class="bg-gris-menu hover:bg-slate-600 h-4/5 w-32 rounded-[90px] relative items-center justify-center cursor-pointer hidden xg:flex ml-8"
+            (mouseenter)="showDropdownSug = true" (mouseleave)="showDropdownSug = false">
+            <a class="block text-center py-2" href="/sugerencias">Sugerencias</a>
+            <div class="dropdown absolute top-10 w-full bg-black shadow-lg rounded ml-1" *ngIf="showDropdownSug">
+                <ul>
+                    <li class="w-full"><a class="block w-full px-4 py-2 text-white hover:bg-slate-800" href="/versugerencias">Ver</a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div
-            class="bg-gris-menu h-4/5 hover:bg-slate-600 w-32 rounded-[90px] flex items-center justify-center hidden xg:flex">
-            <a class="w-full text-center" href="#link5">Login</a>
+            class="bg-gris-menu h-4/5 hover:bg-slate-600 w-32 rounded-[90px]  items-center justify-center hidden xg:flex ml-8" *ngIf="!isLogged(); else loggedIncanvas">
+            <a class="w-full text-center" href="/login">Login</a>
         </div>
-        <a
-        class="block xg:hidden rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out  hover:shadow-primary-2   dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-        data-twe-offcanvas-toggle
-        href="#offcanvasExample"
-        role="button"
-        aria-controls="offcanvasExample"
-        data-twe-ripple-init
-        data-twe-ripple-color="light">
-        <svg class="w-7 fill-current text-red-500" viewBox="0 -0.5 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-          <g id="SVGRepo_iconCarrier">
-            <title>menu_navigation_grid [#1529]</title>
-            <desc>Created with Sketch.</desc>
-            <defs></defs>
-            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <g id="Dribbble-Light-Preview" transform="translate(-99.000000, -200.000000)" class="fill-current text-red-500 hover:text-red-400">
-                <g id="icons" transform="translate(56.000000, 160.000000)">
-                  <path d="M60.85,51 L57.7,51 C55.96015,51 54.55,52.343 54.55,54 L54.55,57 C54.55,58.657 55.96015,60 57.7,60 L60.85,60 C62.58985,60 64,58.657 64,57 L64,54 C64,52.343 62.58985,51 60.85,51 M49.3,51 L46.15,51 C44.41015,51 43,52.343 43,54 L43,57 C43,58.657 44.41015,60 46.15,60 L49.3,60 C51.03985,60 52.45,58.657 52.45,57 L52.45,54 C52.45,52.343 51.03985,51 49.3,51 M60.85,40 L57.7,40 C55.96015,40 54.55,41.343 54.55,43 L54.55,46 C54.55,47.657 55.96015,49 57.7,49 L60.85,49 C62.58985,49 64,47.657 64,46 L64,43 C64,41.343 62.58985,40 60.85,40 M52.45,43 L52.45,46 C52.45,47.657 51.03985,49 49.3,49 L46.15,49 C44.41015,49 43,47.657 43,46 L43,43 C43,41.343 44.41015,40 46.15,40 L49.3,40 C51.03985,40 52.45,41.343 52.45,43" id="menu_navigation_grid-[#1529]"></path>
+        <ng-template #loggedIncanvas>
+            <div
+            class="bg-gris-menu h-4/5 hover:bg-slate-600 w-32 rounded-[90px]  items-center justify-center hidden xg:flex">
+            <a class="w-full text-center" style="cursor: pointer;" (click)="logOut()">Cerrar Sesión</a>
+        </div>
+        </ng-template>
+        <a class="block xg:hidden rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white  transition duration-150 ease-in-out  hover:shadow-red-600   dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+            data-twe-offcanvas-toggle href="#offcanvasExample" role="button" aria-controls="offcanvasExample"
+            data-twe-ripple-init data-twe-ripple-color="light">
+            <svg class="w-7 fill-current text-red-500" viewBox="0 -0.5 21 21" version="1.1"
+                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <title>menu_navigation_grid [#1529]</title>
+                    <desc>Created with Sketch.</desc>
+                    <defs></defs>
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Dribbble-Light-Preview" transform="translate(-99.000000, -200.000000)"
+                            class="fill-current text-red-700 hover:text-red-600">
+                            <g id="icons" transform="translate(56.000000, 160.000000)">
+                                <path
+                                    d="M60.85,51 L57.7,51 C55.96015,51 54.55,52.343 54.55,54 L54.55,57 C54.55,58.657 55.96015,60 57.7,60 L60.85,60 C62.58985,60 64,58.657 64,57 L64,54 C64,52.343 62.58985,51 60.85,51 M49.3,51 L46.15,51 C44.41015,51 43,52.343 43,54 L43,57 C43,58.657 44.41015,60 46.15,60 L49.3,60 C51.03985,60 52.45,58.657 52.45,57 L52.45,54 C52.45,52.343 51.03985,51 49.3,51 M60.85,40 L57.7,40 C55.96015,40 54.55,41.343 54.55,43 L54.55,46 C54.55,47.657 55.96015,49 57.7,49 L60.85,49 C62.58985,49 64,47.657 64,46 L64,43 C64,41.343 62.58985,40 60.85,40 M52.45,43 L52.45,46 C52.45,47.657 51.03985,49 49.3,49 L46.15,49 C44.41015,49 43,47.657 43,46 L43,43 C43,41.343 44.41015,40 46.15,40 L49.3,40 C51.03985,40 52.45,41.343 52.45,43"
+                                    id="menu_navigation_grid-[#1529]"></path>
+                            </g>
+                        </g>
+                    </g>
                 </g>
-              </g>
-            </g>
-          </g>
-        </svg>
-      </a>
-      
-      
-      
+            </svg>
+        </a>
+
+
+
     </div>
 
 
@@ -59,8 +78,7 @@
     tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" data-twe-offcanvas-init>
     <div class="flex items-center justify-between p-4">
         <h5 class="mb-0 font-semibold leading-normal" id="offcanvasExampleLabel">
-            <img class="w-16 ml-5" src="../assets/imagenes/logorojo.png"
-                    alt="">
+            <img class="w-16 ml-5" src="../assets/imagenes/logorojo.png" alt="">
         </h5>
         <button type="button"
             class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
@@ -76,10 +94,32 @@
     <div class="flex-grow overflow-y-auto">
         <div>
             <ul>
-                <li class="mt-7 h-10 hover:bg-slate-600 place-content-center"><a class="text-white ml-8" href="/eventos">Eventos</a></li>
-                <li class="mt-7 h-10 hover:bg-slate-600 place-content-center"><a class="text-white ml-8" href="/luchadores">Luchadores</a></li>
-                <li class="mt-7 h-10 hover:bg-slate-600 place-content-center"><a class="text-white ml-8" href="/sugerencias">Sugerencias</a></li>
-                <li class="mt-7 h-10 hover:bg-slate-600 place-content-center"><a class="text-white ml-8" href="/login">Login</a></li>
+                <li class="mt-7 h-10 hover:bg-slate-600 place-content-center"><a class="text-white ml-8"
+                        href="/eventos">Eventos</a></li>
+                <li class="mt-7 h-10 hover:bg-slate-600 place-content-center" (mouseenter)="showDropdownSug = true"><a class="text-white ml-8"
+                        href="/luchadores">Luchadores</a>
+                       
+                    </li>
+                    <div *ngIf="showDropdownSug" (mouseleave)="showDropdownSug = false">
+                    <li class="mt-7 h-10 hover:bg-slate-600 place-content-center"><a class="text-white ml-12"
+                        href="/luchadores">Ranking</a>
+                       
+                    </li>
+                    <li class="mt-7 h-10 hover:bg-slate-600 place-content-center"><a class="text-white ml-12"
+                        href="/todos">Todos</a>  
+                    </li>
+                </div>
+                <li class="mt-7 h-10 hover:bg-slate-600 place-content-center" (mouseenter)="showDropdown = true"><a class="text-white ml-8"
+                        href="/sugerencias">Sugerencias</a></li>
+                        <li class="mt-7 h-10 hover:bg-slate-600 place-content-center" *ngIf="showDropdown" (mouseleave)="showDropdown = false"><a class="text-white ml-12"
+                            href="/versugerencias">Ver</a>  
+                        </li>
+                <li class="mt-7 h-10 hover:bg-slate-600 place-content-center" *ngIf="!isLogged(); else loggedIn" ><a class="text-white ml-8"
+                        href="/login">Login</a></li>
+                        <ng-template #loggedIn>
+                            <li class="mt-7 h-10 hover:bg-slate-600 place-content-center"><a class="text-white ml-8"
+                                style="cursor: pointer;" (click)="logOut()">Cerrar Sesión</a></li>
+                        </ng-template>
             </ul>
         </div>
 

@@ -7,7 +7,7 @@
 <p>Evento : {{sug.evento}}</p>
 <p>Luchadores</p>
 <ul>
-  <li *ngFor="let luchador of sug.peleas; let i = index">
+  <li class="ml-8 mt-2 text-zinc-800" *ngFor="let luchador of sug.peleas; let i = index">
     <ng-container *ngIf="sug.peleas2 && sug.peleas2.length > i; else noSecondFighters">
       {{ luchador }} vs {{ sug.peleas2[i] }}
     </ng-container>

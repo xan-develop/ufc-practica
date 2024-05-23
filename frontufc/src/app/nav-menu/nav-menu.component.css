@@ -1,6 +1,4 @@
-body{
-    background-color: rgb(101, 101, 101);
-}
+
 #menu-toggle:checked ~ #dropdown-menu {
     display: block;
 }

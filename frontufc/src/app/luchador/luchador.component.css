@@ -21,6 +21,17 @@
   }
 
 }
+@media (max-width: 500px) {
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr); /* 2 columnas con el mismo ancho */
+  }
+  .search-bar{
+  
+    display: grid;
+    grid-template-columns: repeat(1 , 1fr);
+  }
+
+}
 #img-luchador{
   margin-top: 20px;
   width: 110%;

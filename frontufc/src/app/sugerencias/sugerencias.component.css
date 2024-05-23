@@ -5,6 +5,9 @@ html{
 nav{
   background-color: azure !important;
 }
+#nav-fondo{
+  background-color: #efefef !important;
+}
 #icon-class{
   background-color: #ffffff !important;
   margin-top: 10px;
@@ -104,4 +107,16 @@ input[type="submit"]:hover {
 
 .sug-btn:hover {
   background-color: #211f1f;
+}
+@media (max-width: 1300px) {
+  #sugerencias {
+    width: 60%;
+  }
+
+}
+@media (max-width: 600px) {
+  #sugerencias {
+    width: 80%;
+  }
+
 }
