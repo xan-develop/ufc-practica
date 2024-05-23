@@ -1,38 +1,87 @@
 <section>
     <div class="bg-black flex items-center justify-center gap-2 w-4/5 h-12 rounded-[100px] mx-auto ">
-        <div class="bg-gris-menu hover:bg-slate-600 h-4/5 w-32 rounded-[90px] flex items-center justify-center cursor-pointer hidden xg:flex">
+        <div
+            class="bg-gris-menu hover:bg-slate-600 h-4/5 w-32 rounded-[90px] flex items-center justify-center cursor-pointer hidden xg:flex">
             <a class="w-full text-center" href="/eventos">Eventos</a>
         </div>
-        <div class="bg-gris-menu hover:bg-slate-600 h-4/5 w-32 rounded-[90px] flex items-center justify-center hidden xg:flex">
+        <div
+            class="bg-gris-menu hover:bg-slate-600 h-4/5 w-32 rounded-[90px] flex items-center justify-center hidden xg:flex">
             <a class="w-full text-center" href="#link2">Luchadorres</a>
         </div>
         <div class="h-4/5 w-32 rounded-[90px] flex items-center justify-center">
-            <a class="w-full text-center" href="#link3"><img class="w-16 ml-5" src="../assets/imagenes/logorojo.png" alt=""></a>
+            <a class="w-full text-center" href="#link3"><img class="w-16 ml-5" src="../assets/imagenes/logorojo.png"
+                    alt=""></a>
         </div>
-        <div class="bg-gris-menu h-4/5 hover:bg-slate-600 w-32 rounded-[90px] flex items-center justify-center hidden xg:flex">
+        <div
+            class="bg-gris-menu h-4/5 hover:bg-slate-600 w-32 rounded-[90px] flex items-center justify-center hidden xg:flex">
             <a class="w-full text-center" href="#link4">Sugerencias</a>
         </div>
-        <div class="bg-gris-menu h-4/5 hover:bg-slate-600 w-32 rounded-[90px] flex items-center justify-center hidden xg:flex">
+        <div
+            class="bg-gris-menu h-4/5 hover:bg-slate-600 w-32 rounded-[90px] flex items-center justify-center hidden xg:flex">
             <a class="w-full text-center" href="#link5">Login</a>
         </div>
-            
-        <label for="menu-toggle" class="cursor-pointer xg:hidden block">
-        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-            <title>menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+        <a
+        class="block xg:hidden rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out  hover:shadow-primary-2   dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+        data-twe-offcanvas-toggle
+        href="#offcanvasExample"
+        role="button"
+        aria-controls="offcanvasExample"
+        data-twe-ripple-init
+        data-twe-ripple-color="light">
+        <svg class="w-7 fill-current text-red-500" viewBox="0 -0.5 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <title>menu_navigation_grid [#1529]</title>
+            <desc>Created with Sketch.</desc>
+            <defs></defs>
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="Dribbble-Light-Preview" transform="translate(-99.000000, -200.000000)" class="fill-current text-red-500 hover:text-red-400">
+                <g id="icons" transform="translate(56.000000, 160.000000)">
+                  <path d="M60.85,51 L57.7,51 C55.96015,51 54.55,52.343 54.55,54 L54.55,57 C54.55,58.657 55.96015,60 57.7,60 L60.85,60 C62.58985,60 64,58.657 64,57 L64,54 C64,52.343 62.58985,51 60.85,51 M49.3,51 L46.15,51 C44.41015,51 43,52.343 43,54 L43,57 C43,58.657 44.41015,60 46.15,60 L49.3,60 C51.03985,60 52.45,58.657 52.45,57 L52.45,54 C52.45,52.343 51.03985,51 49.3,51 M60.85,40 L57.7,40 C55.96015,40 54.55,41.343 54.55,43 L54.55,46 C54.55,47.657 55.96015,49 57.7,49 L60.85,49 C62.58985,49 64,47.657 64,46 L64,43 C64,41.343 62.58985,40 60.85,40 M52.45,43 L52.45,46 C52.45,47.657 51.03985,49 49.3,49 L46.15,49 C44.41015,49 43,47.657 43,46 L43,43 C43,41.343 44.41015,40 46.15,40 L49.3,40 C51.03985,40 52.45,41.343 52.45,43" id="menu_navigation_grid-[#1529]"></path>
+                </g>
+              </g>
+            </g>
+          </g>
         </svg>
-        </label>
-        <input class="hidden" type="checkbox" id="menu-toggle" />
-        <div id="dropdown-menu" class=" hidden bg-black w-3/5 h-48 rounded-b-[50px] 
-        place-content-center absolute top-[250px] xg:hidden">
-            <ul class=" space-y-2 text-white">
-                <li class="hover:bg-slate-700 h-full"><a href="/eventos" class="block ml-5 text-white">Eventos</a></li>
-                <li class="hover:bg-slate-700"><a href="#link2" class="block ml-5 text-white">Luchadores</a></li>
-                <li class="hover:bg-slate-700"><a href="#link3" class="block ml-5 text-white">Sugerencias</a></li>
-                <li class="hover:bg-slate-700"><a href="#link4" class="block ml-5 text-white">Login</a></li>
-            </ul>
-        </div>
-        </div> 
-   
+      </a>
+      
+      
+      
+    </div>
+
 
 </section>
+
+
+
+<div class="invisible fixed bottom-0 left-0 top-0 z-[1045] flex w-96 max-w-full -translate-x-full flex-col border-none bg-black bg-clip-padding text-neutral-700 shadow-sm outline-none transition duration-300 ease-in-out data-[twe-offcanvas-show]:transform-none dark:bg-body-dark dark:text-white"
+    tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" data-twe-offcanvas-init>
+    <div class="flex items-center justify-between p-4">
+        <h5 class="mb-0 font-semibold leading-normal" id="offcanvasExampleLabel">
+            <img class="w-16 ml-5" src="../assets/imagenes/logorojo.png"
+                    alt="">
+        </h5>
+        <button type="button"
+            class="box-content rounded-none border-none text-neutral-500 hover:text-neutral-800 hover:no-underline focus:text-neutral-800 focus:opacity-100 focus:shadow-none focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
+            data-twe-offcanvas-dismiss aria-label="Close">
+            <span class="[&>svg]:h-6 [&>svg]:w-6">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </span>
+        </button>
+    </div>
+    <div class="flex-grow overflow-y-auto">
+        <div>
+            <ul>
+                <li class="mt-7 h-10 hover:bg-slate-600 place-content-center"><a class="text-white ml-8" href="/eventos">Eventos</a></li>
+                <li class="mt-7 h-10 hover:bg-slate-600 place-content-center"><a class="text-white ml-8" href="/luchadores">Luchadores</a></li>
+                <li class="mt-7 h-10 hover:bg-slate-600 place-content-center"><a class="text-white ml-8" href="/sugerencias">Sugerencias</a></li>
+                <li class="mt-7 h-10 hover:bg-slate-600 place-content-center"><a class="text-white ml-8" href="/login">Login</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
