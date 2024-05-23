@@ -2,14 +2,13 @@
   margin-top: 50px;
   border: 1px solid bisque;
   width: 100%;
-  height: 60vh;
+  height: 70vh;
   display: grid;
   grid-template-columns: repeat(3 , 1fr);
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.918);
   margin-bottom: 30px;
 }
-
 
 #pais img{
   width: 10%;
@@ -67,6 +66,7 @@ text-shadow: 0px 4px 4px rgba(187, 159, 86, 0.41);
   justify-content:center;
   align-items: end;
   text-align: center;
+  margin-right: 90px;
 }
 #title{
   color: aliceblue;
@@ -106,7 +106,6 @@ text-shadow: 0px 4px 4px rgba(187, 159, 86, 0.41);
 
 }
 #imagen-luchador{
-  position: absolute;
   width: 60%;
   margin-top: 10px;
   margin-left: 90px;
@@ -205,6 +204,58 @@ transition: 0.5s;
     font-size: 15px;
 margin-top: 0;
 flex-direction: row;
+    }
+}
+@media (max-width: 700px) {
+  #container{
+    grid-template-columns: repeat(1 , 2fr);
+    height: 900px;
+  }
+  #ultimoscombates{
+    grid-template-columns: repeat(1 , 1fr);
+  }
+  .title-stat{
+    text-align: center !important;
+    font-size: 20px !important;
+  }
+  .num-stat{
+    font-size: 40px !important;
+  }
+  #info p{
+    font-size: 15px;
+margin-top: 0;
+
+white-space: nowrap;
+    }
+}
+@media (max-width: 450px) {
+  #container{
+    grid-template-columns: repeat(1 , 2fr);
+    height: 900px;
+  }
+  #ultimoscombates{
+    grid-template-columns: repeat(1 , 1fr);
+  }
+  .title-stat{
+    text-align: center !important;
+    font-size: 20px !important;
+  }
+  .num-stat{
+    font-size: 40px !important;
+  }
+  #info p{
+    font-size: 10px;
+    margin-left: 5px;
+margin-top: 0;
+flex-direction: row;
+flex-wrap: wrap;
+white-space: nowrap;
+    }
+    #info{
+    
+    }
+    .title-stat , .num-stat{
+      font-size: 15px !important;
     }
 }
 a{
