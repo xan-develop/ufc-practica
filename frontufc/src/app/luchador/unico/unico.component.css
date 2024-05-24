@@ -99,8 +99,8 @@ text-shadow: 0px 4px 4px rgba(187, 159, 86, 0.41);
 }
 #foto{
   position: relative;
-  align-items: center;
-  justify-content: center;
+  align-items: end;
+  justify-content: end;
 
   filter: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.25));
 
@@ -109,7 +109,7 @@ text-shadow: 0px 4px 4px rgba(187, 159, 86, 0.41);
   width: 60%;
   margin-top: 10px;
   margin-left: 90px;
-  top: auto;
+  position:absolute;
   bottom: 0;
 }
 .transparent-img {
@@ -217,6 +217,13 @@ flex-direction: row;
   .title-stat{
     text-align: center !important;
     font-size: 20px !important;
+  }
+  #imagen-luchador{
+    width: 60%;
+    margin-top: 10px;
+    margin-left: 90px;
+    position:relative;
+    bottom: 0;
   }
   .num-stat{
     font-size: 40px !important;

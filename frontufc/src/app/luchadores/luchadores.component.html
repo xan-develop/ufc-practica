@@ -1,6 +1,6 @@
 <section id="luchadores">
   <div id="luch-container">
-    <div class="pesos" *ngFor="let campeon of campeones">
+    <div class="pesos animate-fade-up animate-once animate-duration-[1000ms] animate-ease-linear hover:scale-50" *ngFor="let campeon of campeones">
       <a href="/luchador/{{campeon.id}}" style="text-decoration: none;"><div id="campeon">
         <div id="img-campeon">
           <img [src]="urlImg + campeon.imagen" alt="">
