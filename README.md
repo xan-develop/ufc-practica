@@ -190,32 +190,3 @@ module.exports = {
     para deshacer los cambios realizados por la última migración aplicada.
 
 
-
-
-## Consultas a realizar por modelo
-Se dan por echo las siquientes consultas 
-- Insertar 
-- Actualizar
-- Eliminar
-- Listar
- 
-### Luchador
-
-- Luchadores por peso
-
-### Eventos
-- Combates por evento
-
-### Combate
-
-- Combates asignados y arbitros
-
-- Introducir participacion en una pelea , solo 2 por idCombate y tienen que ser del mismo peso  
-Ejemplo de insersion json :
-```json
-{
-    "luchador1": 4,
-    "luchador2": 5
-}
-```
-
